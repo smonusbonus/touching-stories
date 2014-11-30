@@ -1,0 +1,17 @@
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\bin\Debug\Resources\icon.png
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\bin\Debug\TouchingStory.xml
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\bin\Debug\TouchingStory.exe
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\bin\Debug\TouchingStory.pdb
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\SurfaceWindow1.baml
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TagKeyword.baml
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\App.baml
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\SurfaceWindow1.g.cs
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TagKeyword.g.cs
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\App.g.cs
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory_Content.g.cs
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory_MarkupCompile.cache
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.g.resources
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.Properties.Resources.resources
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.csproj.GenerateResource.Cache
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.exe
+c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.pdb
