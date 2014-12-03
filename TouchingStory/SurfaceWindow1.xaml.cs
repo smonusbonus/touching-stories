@@ -15,22 +15,32 @@ using Microsoft.Surface;
 using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace TouchingStory
 {
     /// <summary>
     /// Interaction logic for SurfaceWindow1.xaml
     /// </summary>
+    /// 
+    
     public partial class SurfaceWindow1 : SurfaceWindow
     {
         /// <summary>
         /// Default constructor.
         /// </summary>
+        List<Story> stories;
         public SurfaceWindow1()
         {
             InitializeComponent();
             InitializeDefinitions();
-
+            // load the json file into Story Class when starting the app
+            LoadJson();
+            
+            // Testing: this is a test to display one element of the json file 
+            story_text.Content = stories[0].text;
+            
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
         }
@@ -101,7 +111,17 @@ namespace TouchingStory
             //TODO: disable audio, animations here
         }
 
-
+        public void LoadJson()
+        {
+            // the stories.json is located in \TouchingStory\bin\Debug
+            using (StreamReader r = new StreamReader("stories.json"))
+            {
+                // to use JsonConvert you need to install Nuget Package Manager (google how to do it) and then in this Manager install "Newtonsoft Json" package
+                string json = r.ReadToEnd();
+                stories = JsonConvert.DeserializeObject<List<Story>>(json);
+            }
+        }
+        
         private void InitializeDefinitions()
         {
             for (byte k = 1; k <= 5; k++)

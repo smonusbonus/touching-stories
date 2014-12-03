@@ -4,15 +4,16 @@
     xmlns:s="http://schemas.microsoft.com/surface/2008"
     Title="TouchingStory"
     >
+
   <Grid>
-        <s:TagVisualizer 
+        <Label Name="story_text"></Label>
+            <s:TagVisualizer 
             Name="MyTagVisualizer" 
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"
             Background="White" 
             Height="Auto" Width="Auto"
-            VisualizationAdded="OnVisualizationAdded"
-            >
+            VisualizationAdded="OnVisualizationAdded" Margin="85,-12,-85,12">
         </s:TagVisualizer>
 
     </Grid>
