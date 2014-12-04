@@ -15,3 +15,21 @@ c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStor
 c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.csproj.GenerateResource.Cache
 c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.exe
 c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.pdb
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\TouchingStory.exe
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\TouchingStory.pdb
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\bin\Debug\Resources\icon.png
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\bin\Debug\TouchingStory.xml
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\bin\Debug\TouchingStory.exe
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\bin\Debug\TouchingStory.pdb
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\TouchingStory.csprojResolveAssemblyReference.cache
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\SurfaceWindow1.baml
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\TagKeyword.baml
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\App.baml
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\SurfaceWindow1.g.cs
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\TagKeyword.g.cs
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\App.g.cs
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\TouchingStory_Content.g.cs
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\TouchingStory_MarkupCompile.cache
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\TouchingStory.g.resources
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\TouchingStory.Properties.Resources.resources
+C:\Users\smonusbonus\Documents\GitHub\touching-stories\TouchingStory\obj\Debug\TouchingStory.csproj.GenerateResource.Cache
