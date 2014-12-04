@@ -15,3 +15,6 @@ c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStor
 c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.csproj.GenerateResource.Cache
 c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.exe
 c:\users\hannam\documents\visual studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.pdb
+C:\Users\HanNam\Documents\Visual Studio 2010\Projects\TouchingStory\TouchingStory\obj\Debug\TouchingStory.csprojResolveAssemblyReference.cache
+C:\Users\HanNam\Documents\Visual Studio 2010\Projects\TouchingStory\TouchingStory\bin\Debug\Newtonsoft.Json.dll
+C:\Users\HanNam\Documents\Visual Studio 2010\Projects\TouchingStory\TouchingStory\bin\Debug\Newtonsoft.Json.xml
