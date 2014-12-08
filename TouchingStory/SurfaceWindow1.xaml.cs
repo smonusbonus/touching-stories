@@ -30,16 +30,27 @@ namespace TouchingStory
         /// <summary>
         /// Default constructor.
         /// </summary>
-        List<Story> stories;
+        public List<Story> stories;
+
         public SurfaceWindow1()
         {
             InitializeComponent();
             InitializeDefinitions();
+
             // load the json file into Story Class when starting the app
-            LoadJson();
+            List<Story> story_list = LoadJson();
+
+            // filter json based on keyword
+            int[] listOfIds = FilterJson(story_list, "dood");
+
+            // print ids of corresponding keyword
+            foreach(int id in listOfIds) {
+                System.Diagnostics.Debug.WriteLine(id);
+            }
+            
             
             // Testing: this is a test to display one element of the json file 
-            story_text.Content = stories[0].text;
+            story_text.Content = story_list[0].text;
             
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
@@ -111,7 +122,7 @@ namespace TouchingStory
             //TODO: disable audio, animations here
         }
 
-        public void LoadJson()
+        public List<Story> LoadJson()
         {
             // the stories.json is located in \TouchingStory\bin\Debug
             using (StreamReader r = new StreamReader("stories.json"))
@@ -119,7 +130,31 @@ namespace TouchingStory
                 // to use JsonConvert you need to install Nuget Package Manager (google how to do it) and then in this Manager install "Newtonsoft Json" package
                 string json = r.ReadToEnd();
                 stories = JsonConvert.DeserializeObject<List<Story>>(json);
+                return stories;
             }
+        }
+
+        // this function filters the json data based on a tag-name
+        public int[] FilterJson(List<Story> stories, string matchTag) 
+        {
+            //int[] idList;
+            List<int> idList = new List<int>();
+
+            for(byte i = 0; i < stories.Count; i++) 
+            {
+                //System.Diagnostics.Debug.WriteLine("i: " + i + " id: " + stories[i].id + " subgenre: " + stories[i].subgenre);
+
+                foreach(string tag in stories[i].tags) 
+                {
+                    if(tag == matchTag)
+                    {
+                        System.Diagnostics.Debug.WriteLine("matching tag " + tag);
+                        idList.Add(stories[i].id);
+                    }
+                }
+            }
+
+            return idList.ToArray();
         }
         
         private void InitializeDefinitions()
