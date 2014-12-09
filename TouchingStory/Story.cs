@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TouchingStory
 {
-    class Story
+    public class Story
     {
         /// <summary>
         /// the variable name will be automatically matched with the node name in the json file 

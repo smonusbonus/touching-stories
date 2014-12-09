@@ -3,18 +3,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:s="http://schemas.microsoft.com/surface/2008"
     Loaded="TagKeyword_Loaded"
-    Height="400" Width="400">
-    <s:ScatterView>
-        <Ellipse Name="myEllipse"
-                 HorizontalAlignment="Stretch"
-                 VerticalAlignment="Stretch"/>
-        <Ellipse Name="testEllipse"
-                 HorizontalAlignment="Stretch"
-                 VerticalAlignment="Stretch"
-                 Fill="Black"/>
+    Height="500" Width="500">
+    <s:ScatterView Name="VisualizedCells">
         <Label Name="CameraModel" 
                Content="Model" 
                HorizontalAlignment="Center" 
-               VerticalAlignment="Center"/>            
+               VerticalAlignment="Center"
+               FontSize="10"/>
+        <Grid Height="60"
+              Width="100">
+            <Ellipse Name="myEllipse"
+                     VerticalAlignment="Stretch"
+                     HorizontalAlignment="Stretch"
+                     />
+            <TextBlock Name="StoryCell" 
+                       Text="Brief" 
+                       FontSize="10"               
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+            ></TextBlock>
+        </Grid>
+        
+        
     </s:ScatterView>
 </s:TagVisualization>

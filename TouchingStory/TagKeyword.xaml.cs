@@ -15,6 +15,7 @@ using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
 
+
 namespace TouchingStory
 {
     /// <summary>
@@ -22,14 +23,28 @@ namespace TouchingStory
     /// </summary>
     public partial class TagKeyword : TagVisualization
     {
+        List<Story> storiesList;
         public TagKeyword()
         {
             InitializeComponent();
+            
         }
 
+ 
         private void TagKeyword_Loaded(object sender, RoutedEventArgs e)
         {
             //TODO: customize TagKeyword's UI based on this.VisualizedTag here
+
+            // I need the subset of stories for display, i can get this with the value of the object
+           
+            storiesList = SurfaceWindow1.stories;
+            for (byte k = 1; k < this.storiesList.Count + 1; k++)   
+            {               
+                TextBlock story_brief = new TextBlock();
+                story_brief.Text = storiesList[k].text;
+                VisualizedCells.Items.Add(story_brief);
+            }
         }
+
     }
 }

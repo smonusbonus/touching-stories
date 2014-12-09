@@ -76,6 +76,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Story.cs" />
+    <Compile Include="StringTool.cs" />
     <Compile Include="TagKeyword.xaml.cs">
       <DependentUpon>TagKeyword.xaml</DependentUpon>
     </Compile>

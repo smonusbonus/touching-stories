@@ -30,7 +30,7 @@ namespace TouchingStory
         /// <summary>
         /// Default constructor.
         /// </summary>
-        List<Story> stories;
+        public static List<Story> stories;
         public SurfaceWindow1()
         {
             InitializeComponent();
@@ -152,30 +152,35 @@ namespace TouchingStory
 
         private void OnVisualizationAdded(object sender, TagVisualizerEventArgs e)
         {
-            TagKeyword camera = (TagKeyword)e.TagVisualization;
-            switch (camera.VisualizedTag.Value)
+            TagKeyword story = (TagKeyword)e.TagVisualization;
+            switch (story.VisualizedTag.Value)
             {
                 case 1:
-                    camera.CameraModel.Content = "Fabrikam, Inc. ABC-12";
-                    camera.myEllipse.Fill = SurfaceColors.Accent1Brush;
+                    
+                    story.CameraModel.Content = StringTool.Truncate(stories[0].text, 55);
+                    story.myEllipse.Fill = SurfaceColors.Accent1Brush;
+                    story.StoryCell.Text = StringTool.Truncate(stories[0].text, 30);
                     break;
                 case 2:
-                    camera.CameraModel.Content = "Fabrikam, Inc. DEF-34";
-                    camera.myEllipse.Fill = SurfaceColors.Accent2Brush;
+                    story.CameraModel.Content = "Fabrikam, Inc. DEF-34";
+                    story.myEllipse.Fill = SurfaceColors.Accent2Brush;
                     break;
                 case 3:
-                    camera.CameraModel.Content = "Fabrikam, Inc. GHI-56";
-                    camera.myEllipse.Fill = SurfaceColors.Accent3Brush;
+                    story.CameraModel.Content = "Fabrikam, Inc. GHI-56";
+                    story.myEllipse.Fill = SurfaceColors.Accent3Brush;
                     break;
                 case 4:
-                    camera.CameraModel.Content = "Fabrikam, Inc. JKL-78";
-                    camera.myEllipse.Fill = SurfaceColors.Accent4Brush;
+                    story.CameraModel.Content = "Fabrikam, Inc. JKL-78";
+                    story.myEllipse.Fill = SurfaceColors.Accent4Brush;
                     break;
                 default:
-                    camera.CameraModel.Content = "UNKNOWN MODEL";
-                    camera.myEllipse.Fill = SurfaceColors.ControlAccentBrush;
+                    story.CameraModel.Content = "UNKNOWN MODEL";
+                    story.myEllipse.Fill = SurfaceColors.ControlAccentBrush;
                     break;
             }
         }
+
+  
+
     }
 }
