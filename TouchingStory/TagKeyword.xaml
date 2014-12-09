@@ -4,6 +4,7 @@
     xmlns:s="http://schemas.microsoft.com/surface/2008"
     Loaded="TagKeyword_Loaded"
     Height="500" Width="500">
+    <!-- test test-->
     <s:ScatterView Name="VisualizedCells">
         <s:ScatterView HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <!--story window-->
