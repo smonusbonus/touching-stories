@@ -6,8 +6,8 @@
     >
 
   <Grid>
-        <Label Name="story_text"></Label>
-            <s:TagVisualizer 
+        
+        <s:TagVisualizer 
             Name="MyTagVisualizer" 
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"

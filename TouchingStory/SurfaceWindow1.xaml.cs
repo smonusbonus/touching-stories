@@ -32,6 +32,7 @@ namespace TouchingStory
         /// </summary>
 
         public List<Story> stories;
+        public static int[] listOfIds; 
 
         public SurfaceWindow1()
         {
@@ -42,7 +43,7 @@ namespace TouchingStory
             List<Story> story_list = LoadJson();
 
             // filter json based on keyword
-            int[] listOfIds = FilterJson(story_list, "dood");
+            listOfIds = FilterJson(story_list, "dood");
 
             // print ids of corresponding keyword
             foreach(int id in listOfIds) {
@@ -51,7 +52,7 @@ namespace TouchingStory
             
             
             // Testing: this is a test to display one element of the json file 
-            story_text.Content = story_list[0].text;
+            
             
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
@@ -184,6 +185,27 @@ namespace TouchingStory
                 // Add the definition to the collection.
                 MyTagVisualizer.Definitions.Add(tagDef);
             }
+            TagVisualizationDefinition tagDef0 =
+                    new TagVisualizationDefinition();
+            // The tag value that this definition will respond to.
+            tagDef0.Value = 0xC0;
+            // The .xaml file for the UI
+            tagDef0.Source =
+                new Uri("TagKeyword.xaml", UriKind.Relative);
+            // The maximum number for this tag value.
+            tagDef0.MaxCount = 2;
+            // The visualization stays for 2 seconds.
+            tagDef0.LostTagTimeout = 2000.0;
+            // Orientation offset (default).
+            tagDef0.OrientationOffsetFromTag = 0.0;
+            // Physical offset (horizontal inches, vertical inches).
+            tagDef0.PhysicalCenterOffsetFromTag = new Vector(2.0, 2.0);
+            // Tag removal behavior (default).
+            tagDef0.TagRemovedBehavior = TagRemovedBehavior.Fade;
+            // Orient UI to tag? (default).
+            tagDef0.UsesTagOrientation = true;
+            // Add the definition to the collection.
+            MyTagVisualizer.Definitions.Add(tagDef0);
         }
 
         private void OnVisualizationAdded(object sender, TagVisualizerEventArgs e)

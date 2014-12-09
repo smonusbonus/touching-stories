@@ -36,14 +36,14 @@ namespace TouchingStory
             //TODO: customize TagKeyword's UI based on this.VisualizedTag here
 
             // I need the subset of stories for display, i can get this with the value of the object
-           
-            storiesList = SurfaceWindow1.stories;
+          /*  int[] test = TouchingStory.SurfaceWindow1.listOfIds;
+            int a= 0;
             for (byte k = 1; k < this.storiesList.Count + 1; k++)   
             {               
                 TextBlock story_brief = new TextBlock();
                 story_brief.Text = storiesList[k].text;
                 VisualizedCells.Items.Add(story_brief);
-            }
+            } */
         }
 
     }
