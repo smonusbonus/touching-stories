@@ -23,7 +23,7 @@ namespace TouchingStory
     /// </summary>
     public partial class TagKeyword : TagVisualization
     {
-        List<Story> storiesList;
+        int[] listofid;
         public TagKeyword()
         {
             InitializeComponent();
@@ -35,15 +35,15 @@ namespace TouchingStory
         {
             //TODO: customize TagKeyword's UI based on this.VisualizedTag here
 
-            // I need the subset of stories for display, i can get this with the value of the object
-          /*  int[] test = TouchingStory.SurfaceWindow1.listOfIds;
-            int a= 0;
-            for (byte k = 1; k < this.storiesList.Count + 1; k++)   
+            int[] storyids = TouchingStory.SurfaceWindow1.listOfIds;
+            List<Story> story_list = TouchingStory.SurfaceWindow1.stories;
+            for (byte k = 0; k < storyids.Length; k++)   
             {               
-                TextBlock story_brief = new TextBlock();
-                story_brief.Text = storiesList[k].text;
+                TextBlock story_brief = new TextBlock();                
+                Story story = story_list.Find(x => x.id == storyids[k]);
+                story_brief.Text = StringTool.Truncate(story.text, 40); ;
                 VisualizedCells.Items.Add(story_brief);
-            } */
+            }
         }
 
     }

@@ -31,7 +31,7 @@ namespace TouchingStory
         /// Default constructor.
         /// </summary>
 
-        public List<Story> stories;
+        public static List<Story> stories;
         public static int[] listOfIds; 
 
 
@@ -239,7 +239,10 @@ namespace TouchingStory
             }
         }
 
-  
+        /*public static List<Story> Stories()
+        {
+            return stories;
+        }*/
 
     }
 }
