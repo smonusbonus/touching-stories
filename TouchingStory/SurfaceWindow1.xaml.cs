@@ -34,6 +34,7 @@ namespace TouchingStory
         public List<Story> stories;
         public static int[] listOfIds; 
 
+
         public SurfaceWindow1()
         {
             InitializeComponent();

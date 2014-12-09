@@ -9,14 +9,14 @@
             Background="WhiteSmoke"
             Width="{Binding Path=ActualWidth, ElementName=story}"
             Height="{Binding Path=ActualHeight, ElementName=story}">
-                        <TextBlock
-            Name="story"
-            Padding="20"
-            Background="WhiteSmoke"
-            Foreground="Black"
-            TextAlignment="Left"
-            Width="500"
-            Text="NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan. ">
+            <TextBlock
+                Name="story"
+                Padding="20"
+                Background="WhiteSmoke"
+                Foreground="Black"
+                TextAlignment="Left"
+                Width="500"
+                Text="NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan. ">
             </TextBlock>
         </s:ScatterViewItem>
         <Label Name="CameraModel" 
@@ -37,6 +37,5 @@
                        HorizontalAlignment="Center"
             ></TextBlock>
         </Grid>
-
     </s:ScatterView>
 </s:TagVisualization>
