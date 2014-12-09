@@ -5,22 +5,20 @@
     Loaded="TagKeyword_Loaded"
     Height="500" Width="500">
     <s:ScatterView Name="VisualizedCells">
-        <s:ScatterView HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <s:ScatterViewItem
-Background="WhiteSmoke"
-Width="{Binding Path=ActualWidth, ElementName=story}"
-Height="{Binding Path=ActualHeight, ElementName=story}">
-                <TextBlock
-Name="story"
-Padding="20"
-Background="WhiteSmoke"
-Foreground="Black"
-TextAlignment="Left"
-Width="500"
-Text="NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan. ">
-                </TextBlock>
-            </s:ScatterViewItem>
-        </s:ScatterView>
+        <s:ScatterViewItem
+            Background="WhiteSmoke"
+            Width="{Binding Path=ActualWidth, ElementName=story}"
+            Height="{Binding Path=ActualHeight, ElementName=story}">
+                        <TextBlock
+            Name="story"
+            Padding="20"
+            Background="WhiteSmoke"
+            Foreground="Black"
+            TextAlignment="Left"
+            Width="500"
+            Text="NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan. ">
+            </TextBlock>
+        </s:ScatterViewItem>
         <Label Name="CameraModel" 
                Content="Model" 
                HorizontalAlignment="Center" 
@@ -39,7 +37,6 @@ Text="NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan
                        HorizontalAlignment="Center"
             ></TextBlock>
         </Grid>
-        
-        
+
     </s:ScatterView>
 </s:TagVisualization>
