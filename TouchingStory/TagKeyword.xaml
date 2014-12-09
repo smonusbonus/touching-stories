@@ -8,12 +8,12 @@
         <s:ScatterView HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <!--story window-->
             <s:ScatterViewItem
-Background="WhiteSmoke"
-Width="{Binding Path=ActualWidth, ElementName=story}"
-Height="{Binding Path=ActualHeight, ElementName=story}">
+                Background="WhiteSmoke"
+                Width="{Binding Path=ActualWidth, ElementName=story}"
+                Height="{Binding Path=ActualHeight, ElementName=story}">
                 <TextBlock
-Name="story"
-Padding="20"
+    Name="story"
+    Padding="20"
 Background="WhiteSmoke"
 Foreground="Black"
 TextAlignment="Left"
