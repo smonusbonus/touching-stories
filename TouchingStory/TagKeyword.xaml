@@ -6,6 +6,7 @@
     Height="500" Width="500">
     <s:ScatterView Name="VisualizedCells">
         <s:ScatterView HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <!--story window-->
             <s:ScatterViewItem
 Background="WhiteSmoke"
 Width="{Binding Path=ActualWidth, ElementName=story}"
