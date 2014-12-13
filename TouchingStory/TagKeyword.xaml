@@ -31,8 +31,12 @@
                      HorizontalAlignment="Stretch"
                      />
             <TextBlock Name="StoryCell" 
-                       Text="Brief" 
-                       FontSize="10"               
+                       Text="Brief aadsd asasa sasas sasas sasasas sasasa sadhhhhhhh" 
+                       FontSize="10"     
+                       Background="LightBlue"
+                       Foreground="Black"                      
+                       FontStretch="UltraExpanded"
+                       Padding="5,10,5,10"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
             ></TextBlock>
