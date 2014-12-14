@@ -215,26 +215,14 @@ namespace TouchingStory
             switch (story.VisualizedTag.Value)
             {
                 case 1:
-                    
-                    story.CameraModel.Content = StringTool.Truncate(stories[0].text, 55);
-                    story.myEllipse.Fill = SurfaceColors.Accent1Brush;
-                    story.StoryCell.Text = StringTool.Truncate(stories[0].text, 30);
                     break;
                 case 2:
-                    story.CameraModel.Content = "Fabrikam, Inc. DEF-34";
-                    story.myEllipse.Fill = SurfaceColors.Accent2Brush;
                     break;
                 case 3:
-                    story.CameraModel.Content = "Fabrikam, Inc. GHI-56";
-                    story.myEllipse.Fill = SurfaceColors.Accent3Brush;
                     break;
                 case 4:
-                    story.CameraModel.Content = "Fabrikam, Inc. JKL-78";
-                    story.myEllipse.Fill = SurfaceColors.Accent4Brush;
                     break;
                 default:
-                    story.CameraModel.Content = "UNKNOWN MODEL";
-                    story.myEllipse.Fill = SurfaceColors.ControlAccentBrush;
                     break;
             }
         }
