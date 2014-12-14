@@ -4,8 +4,9 @@
     xmlns:s="http://schemas.microsoft.com/surface/2008"
     Loaded="TagKeyword_Loaded"
     Height="500" Width="500">
-    
+
     <s:ScatterView Name="VisualizedCells">
+        <!-- Storywindow commented out because Lotte wants to work on the positioning of the cells
         <s:ScatterViewItem
             Background="WhiteSmoke"
             Width="{Binding Path=ActualWidth, ElementName=story}"
@@ -20,11 +21,17 @@
                 Text="NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan.NS: Eh dr was eens een eh meisje en ze heette Roodkapje en ze had rood aan. ">
             </TextBlock>
         </s:ScatterViewItem>
+        -->
+        <!-- Also commented out because it is not needed anymore...this introduces a couple of errors
+             because it is called in surfacewindow1.xaml.cs
         <Label Name="CameraModel" 
                Content="Model" 
                HorizontalAlignment="Center" 
                VerticalAlignment="Center"
                FontSize="10"/>
+        -->
+        
+        <!-- same as above
         <Grid Height="60"
               Width="100">
             <Ellipse Name="myEllipse"
@@ -42,5 +49,6 @@
                        HorizontalAlignment="Center"
             ></TextBlock>
         </Grid>
+     -->
     </s:ScatterView>
 </s:TagVisualization>
