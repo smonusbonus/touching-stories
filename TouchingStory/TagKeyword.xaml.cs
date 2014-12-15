@@ -40,31 +40,42 @@ namespace TouchingStory
                 TextBlock story_brief = new TextBlock();                
                 Story story = story_list.Find(x => x.id == storyids[k]);
                 story_brief.Name = "ID" + story.id.ToString();
-                story_brief.Text = StringTool.Truncate(story.text, 60);
-                story_brief.Background = Brushes.LightBlue;
-                story_brief.Foreground = Brushes.Black;
-                story_brief.Padding = new Thickness(5, 10, 5, 10);
-                story_brief.LineHeight = Double.NaN;
-                story_brief.FontSize = 12;
-                story_brief.FontStretch = FontStretches.UltraExpanded;
-                story_brief.TextAlignment = TextAlignment.Left;
-                story_brief.TextWrapping = TextWrapping.Wrap;
-                story_brief.TouchDown += new EventHandler<TouchEventArgs>(cell_TouchDown);
-                VisualizedCells.Items.Add(story_brief);
-                
+                TextBlock cell = (TextBlock)SurfaceWindow1.homesurface.FindName(story_brief.Name);
+                if (cell == null)
+                {
+                    story_brief.Text = StringTool.Truncate(story.text, 60);
+                    story_brief.Background = Brushes.LightBlue;
+                    story_brief.Foreground = Brushes.Black;
+                    story_brief.Padding = new Thickness(5, 10, 5, 10);
+                    story_brief.LineHeight = Double.NaN;
+                    story_brief.FontSize = 12;
+                    story_brief.FontStretch = FontStretches.UltraExpanded;
+                    story_brief.TextAlignment = TextAlignment.Left;
+                    story_brief.TextWrapping = TextWrapping.Wrap;
+                    story_brief.TouchDown += new EventHandler<TouchEventArgs>(cell_TouchDown);
+                    SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
+                    VisualizedCells.Items.Add(story_brief);
+                }
+                else
+                {
+                    cell.Background = Brushes.LightYellow;
+
+                }
             }
         }
 
         private void cell_TouchDown(object sender, TouchEventArgs e)
         {
             TextBlock story_brief = new TextBlock();
-            TextBlock textblock = (TextBlock)sender;
+            TextBlock textblock = (TextBlock)sender;            
             story_brief.Name = textblock.Name + "_window";
-            TextBlock test = (TextBlock)VisualizedCells.FindName(story_brief.Name);
-            if (VisualizedCells.FindName(story_brief.Name) == null)
+            TextBlock test = (TextBlock) VisualizedCells.FindName(story_brief.Name);
+            
+            if (SurfaceWindow1.homesurface.FindName(story_brief.Name) == null)
             {
                 story_brief.Text = textblock.Text;
                 story_brief.Background = Brushes.Gray;
+                SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
                 story_brief.Foreground = Brushes.Black;
                 story_brief.Padding = new Thickness(5, 10, 5, 10);
                 story_brief.LineHeight = Double.NaN;
@@ -75,8 +86,6 @@ namespace TouchingStory
                 VisualizedCells.Items.Add(story_brief);
             }
         }
-
-
 
     }
 }

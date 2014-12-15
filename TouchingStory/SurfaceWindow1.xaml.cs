@@ -33,8 +33,9 @@ namespace TouchingStory
 
         public static List<Story> stories;
         public static int[] listOfIds; 
-
-
+        public static TagVisualizer ms;
+        public static SurfaceWindow homesurface;
+        
         public SurfaceWindow1()
         {
             InitializeComponent();
@@ -45,12 +46,14 @@ namespace TouchingStory
 
             // filter json based on keyword
             listOfIds = FilterJson(story_list, "dood");
-
+            
+            
             // print ids of corresponding keyword
             foreach(int id in listOfIds) {
                 System.Diagnostics.Debug.WriteLine(id);
             }
-            
+            ms = MyTagVisualizer;
+            homesurface = HomeSurface;
             
             // Testing: this is a test to display one element of the json file 
             
@@ -226,11 +229,6 @@ namespace TouchingStory
                     break;
             }
         }
-
-        /*public static List<Story> Stories()
-        {
-            return stories;
-        }*/
 
     }
 }

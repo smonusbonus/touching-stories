@@ -3,17 +3,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:s="http://schemas.microsoft.com/surface/2008"
     Title="TouchingStory"
+                 Name="HomeSurface"
     >
-
-  <Grid>
-        
+        <Grid>
+             
         <s:TagVisualizer 
             Name="MyTagVisualizer" 
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"
             Background="White" 
             Height="Auto" Width="Auto"
-            VisualizationAdded="OnVisualizationAdded" Margin="85,-12,-85,12">
+            VisualizationAdded="OnVisualizationAdded">
         </s:TagVisualizer>
 
     </Grid>
