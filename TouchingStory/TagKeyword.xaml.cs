@@ -60,7 +60,8 @@ namespace TouchingStory
                     story_brief.Width = 100;
                     story_brief.Height = 100;
                     story_brief.TouchDown += new EventHandler<TouchEventArgs>(cell_TouchDown);
-                    story_brief.Margin = new Thickness(100, 0, 0, 0);
+                    // can be used to position the elements properly, although this is probably some kind of hack
+                    story_brief.Margin = new Thickness(240, -50, 0, 0);
                     //Rotate the Surface Button so that the highlight on the Glass Button is coming from that same place on all of them.
                     double circleRadius = VisualizedCells.Height / 2;
                     double radians = rotation * Math.PI / 180.0;

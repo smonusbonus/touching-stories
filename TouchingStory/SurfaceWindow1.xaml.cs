@@ -181,7 +181,7 @@ namespace TouchingStory
                 // Orientation offset (default).
                 tagDef.OrientationOffsetFromTag = 0.0;
                 // Physical offset (horizontal inches, vertical inches).
-                tagDef.PhysicalCenterOffsetFromTag = new Vector(2.0, 2.0);
+                tagDef.PhysicalCenterOffsetFromTag = new Vector(0.0, 0.0);
                 // Tag removal behavior (default).
                 tagDef.TagRemovedBehavior = TagRemovedBehavior.Fade;
                 // Orient UI to tag? (default).
@@ -203,7 +203,7 @@ namespace TouchingStory
             // Orientation offset (default).
             tagDef0.OrientationOffsetFromTag = 0.0;
             // Physical offset (horizontal inches, vertical inches).
-            tagDef0.PhysicalCenterOffsetFromTag = new Vector(2.0, 2.0);
+            tagDef0.PhysicalCenterOffsetFromTag = new Vector(0.0, 0.0);
             // Tag removal behavior (default).
             tagDef0.TagRemovedBehavior = TagRemovedBehavior.Fade;
             // Orient UI to tag? (default).
