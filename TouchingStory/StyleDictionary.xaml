@@ -1,0 +1,199 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+										xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+										xmlns:s="http://schemas.microsoft.com/surface/2008">
+	
+	<!--RenderTransforms used on canvas and button during scale animations-->
+	<TransformGroup x:Key="TransformGroupTransform">
+		<ScaleTransform ScaleX="0"
+										ScaleY="0" />
+		<SkewTransform AngleX="0"
+									 AngleY="0" />
+		<RotateTransform Angle="0" />
+		<TranslateTransform X="0"
+												Y="0" />
+	</TransformGroup>
+	<!--Gradient Brushes for the Button Fill, Stroke, and Highlight-->
+    <RadialGradientBrush x:Key="HighlightBrush" Center="1.384,-0.285" GradientOrigin="1.386,-0.628" RadiusX="0.86500000000000021" RadiusY="0.752">
+        <RadialGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterX="1.384" CenterY="-0.285" ScaleX="0.751" ScaleY="0.751"/>
+                <SkewTransform AngleX="0" AngleY="0" CenterX="1.384" CenterY="-0.285"/>
+                <RotateTransform Angle="0" CenterX="1.384" CenterY="-0.285"/>
+                <TranslateTransform X="-0.904" Y="0.285"/>
+            </TransformGroup>
+        </RadialGradientBrush.RelativeTransform>
+        <GradientStop Color="#4CFFFFFF" Offset="0.684"/>
+        <GradientStop Color="#00FFFFFF" Offset="1"/>
+        <GradientStop Color="#CCFFFFFF" Offset="0.344"/>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="BackgroundBrush" Center="1.384,-0.285" GradientOrigin="1.382,-1.068" RadiusX="0.86500000000000021" RadiusY="0.752">
+        <RadialGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterX="1.384" CenterY="-0.285" ScaleX="1.356" ScaleY="1.356"/>
+                <SkewTransform AngleX="0" AngleY="0" CenterX="1.384" CenterY="-0.285"/>
+                <RotateTransform Angle="0" CenterX="1.384" CenterY="-0.285"/>
+                <TranslateTransform X="-0.887" Y="1.227"/>
+            </TransformGroup>
+        </RadialGradientBrush.RelativeTransform>
+        <GradientStop Color="#26000000" Offset="0.37784422798545547"/>
+        <GradientStop Color="#3FFFFFFF" Offset="0.0042314178001915306"/>
+        <GradientStop Color="#26FFFFFF" Offset="0.68207530813795714"/>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="BackgroundStrokeBrush" GradientOrigin="0.485,-0.456">
+        <RadialGradientBrush.RelativeTransform>
+            <TransformGroup>
+                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.312" ScaleY="2.312"/>
+                <SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5"/>
+                <RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+                <TranslateTransform X="0.005" Y="0.53"/>
+            </TransformGroup>
+        </RadialGradientBrush.RelativeTransform>
+        <GradientStop Color="#4C000000" Offset="0.516"/>
+        <GradientStop Color="#4CFFFFFF" Offset="0.111"/>
+        <GradientStop Color="#195C5C5C" Offset="1"/>
+    </RadialGradientBrush>
+
+	<!--Text Style-->
+	<Style x:Key="TitleLabelStyle"
+				 TargetType="{x:Type Label}">
+		<Setter Property="Foreground"
+						Value="#FF565656" />
+	</Style>
+	<!--Style for the SurfaceButton, Animations, Glass Button, Triggers-->
+    <Style x:Key="SB_Style" TargetType="{x:Type s:SurfaceButton}">						
+			<Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type s:SurfaceButton}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="Press">
+                        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Glow" Storyboard.TargetProperty="(UIElement.Opacity)">
+                        		<SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1" KeySpline="0.598,0.104,0.409,0.904"/>
+                        	</DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="Release">
+                        	<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="Glow" Storyboard.TargetProperty="(UIElement.Opacity)">
+                        		<SplineDoubleKeyFrame KeySpline="0.591,0.096,0.402,0.896" KeyTime="00:00:00.2000000" Value="0"/>
+                        	</DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid x:Name="grid" Width="Auto" Height="Auto" RenderTransformOrigin="0.5,0.5" Background="{x:Null}">
+                        <Grid.RenderTransform>
+                    		<TransformGroup>
+                    			<ScaleTransform ScaleX="1" ScaleY="1"/>
+                    			<SkewTransform AngleX="0" AngleY="0"/>
+                    			<RotateTransform Angle="0"/>
+                    			<TranslateTransform X="0" Y="0"/>
+                    		</TransformGroup>
+                    	</Grid.RenderTransform>
+                    	<Ellipse x:Name="Glow" Opacity="0" StrokeThickness="0" Stroke="{x:Null}" Fill="{DynamicResource ButtonGlowImage}" RenderTransformOrigin="0.5,0.5">
+                    		<Ellipse.OpacityMask>
+                    			<RadialGradientBrush>
+                    				<RadialGradientBrush.RelativeTransform>
+                    					<TransformGroup>
+                    						<ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.353" ScaleY="1.353"/>
+                    						<SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5"/>
+                    						<RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+                    						<TranslateTransform X="0" Y="0"/>
+                    					</TransformGroup>
+                    				</RadialGradientBrush.RelativeTransform>
+                    				<GradientStop Color="#FFFFFFFF" Offset="0.51076536225051106"/>
+                    				<GradientStop Color="#00FFFFFF" Offset="1"/>
+                    			</RadialGradientBrush>
+                    		</Ellipse.OpacityMask>
+                    		<Ellipse.RenderTransform>
+                    			<TransformGroup>
+                    				<ScaleTransform ScaleX="1.4" ScaleY="1.4"/>
+                    				<SkewTransform AngleX="0" AngleY="0"/>
+                    				<RotateTransform Angle="0"/>
+                    				<TranslateTransform X="0" Y="0"/>
+                    			</TransformGroup>
+                    		</Ellipse.RenderTransform>
+                    	</Ellipse>
+                    	<Ellipse x:Name="Background" RenderTransformOrigin="0.5,0.5" StrokeThickness="1" Fill="{StaticResource BackgroundBrush}" Stroke="{StaticResource BackgroundStrokeBrush}"/>
+                    	<ContentPresenter Margin="8,8,8,8"/>
+                    	<Ellipse x:Name="Highlight" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="10" Margin="1,1,1,1" Fill="{StaticResource HighlightBrush}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>                		
+                		<Trigger Property="IsPressed" Value="True">
+                			<Trigger.EnterActions>
+                				<BeginStoryboard Storyboard="{StaticResource Press}" x:Name="Press_BeginStoryboard"/>
+                			</Trigger.EnterActions>						
+                			<Trigger.ExitActions>
+                				<BeginStoryboard Storyboard="{StaticResource Release}" x:Name="Release_BeginStoryboard"/>
+                			</Trigger.ExitActions>
+                		</Trigger>
+                	</ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>   
+	
+	<!--Animations to show all icons, or just the associated icon-->
+    <Storyboard x:Key="ShowImage">
+        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="sbTagImage" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame KeyTime="00:00:00.1000000" Value="{x:Static Visibility.Visible}"/>
+        </ObjectAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="sbTagImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+            <SplineDoubleKeyFrame KeySpline="0.307,0.589,1,1" KeyTime="00:00:00.2000000" Value="1"/>
+            <SplineDoubleKeyFrame KeySpline="0.598,0.284,0.598,0.894" KeyTime="00:00:00.3000000" Value="1.2"/>
+            <SplineDoubleKeyFrame KeySpline="0.311,0.604,1,1" KeyTime="00:00:00.4000000" Value="1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="sbTagImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+            <SplineDoubleKeyFrame KeySpline="0.307,0.589,1,1" KeyTime="00:00:00.2000000" Value="1"/>
+            <SplineDoubleKeyFrame KeySpline="0.598,0.284,0.598,0.894" KeyTime="00:00:00.3000000" Value="1.2"/>
+            <SplineDoubleKeyFrame KeySpline="0.311,0.604,1,1" KeyTime="00:00:00.4000000" Value="1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="sbTagImage" Storyboard.TargetProperty="(UIElement.Opacity)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+            <SplineDoubleKeyFrame KeySpline="0.307,0.589,1,1" KeyTime="00:00:00.2000000" Value="1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ItemCanvas" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0" KeySpline="0.508,0.399,0.496,0.899"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ItemCanvas" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0" KeySpline="0.508,0.399,0.496,0.899"/>
+        </DoubleAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ItemCanvas" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame KeyTime="00:00:00.2330000" Value="{x:Static Visibility.Collapsed}"/>
+        </ObjectAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ItemCanvas" Storyboard.TargetProperty="(UIElement.Opacity)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0" KeySpline="0.508,0.399,0.496,0.899"/>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+    <Storyboard x:Key="ShowAll">
+        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ItemCanvas" Storyboard.TargetProperty="(UIElement.Visibility)" Duration="00:00:00.0010000">
+            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+        </ObjectAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ItemCanvas" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+            <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1" KeySpline="0.201,0.509,1,1"/>
+            <SplineDoubleKeyFrame KeyTime="00:00:00.2330000" Value="1.2" KeySpline="0.5,0.884,1,1"/>
+            <SplineDoubleKeyFrame KeyTime="00:00:00.3670000" Value="1" KeySpline="0.5,0.494,0.508,0.894"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ItemCanvas" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+            <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1" KeySpline="0.201,0.509,1,1"/>
+            <SplineDoubleKeyFrame KeyTime="00:00:00.2330000" Value="1.2" KeySpline="0.5,0.884,1,1"/>
+            <SplineDoubleKeyFrame KeyTime="00:00:00.3670000" Value="1" KeySpline="0.5,0.494,0.508,0.894"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="ItemCanvas" Storyboard.TargetProperty="(UIElement.Opacity)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+            <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1" KeySpline="0.201,0.509,1,1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="sbTagImage" Storyboard.TargetProperty="(UIElement.Visibility)">
+            <DiscreteObjectKeyFrame KeyTime="00:00:00.2330000" Value="{x:Static Visibility.Collapsed}"/>
+        </ObjectAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="sbTagImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="sbTagImage" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="sbTagImage" Storyboard.TargetProperty="(UIElement.Opacity)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00.2330000" Value="0"/>
+        </DoubleAnimationUsingKeyFrames>
+    </Storyboard>
+
+</ResourceDictionary>

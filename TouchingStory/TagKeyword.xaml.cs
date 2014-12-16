@@ -32,9 +32,14 @@ namespace TouchingStory
         private void TagKeyword_Loaded(object sender, RoutedEventArgs e)
         {
             //TODO: customize TagKeyword's UI based on this.VisualizedTag here
+            
 
             int[] storyids = TouchingStory.SurfaceWindow1.listOfIds;
             List<Story> story_list = TouchingStory.SurfaceWindow1.stories;
+
+            double segment = 360.0 / storyids.Length;
+            double rotation = 0.0;
+
             for (byte k = 0; k < storyids.Length; k++)   
             {               
                 TextBlock story_brief = new TextBlock();                
@@ -52,14 +57,27 @@ namespace TouchingStory
                     story_brief.FontStretch = FontStretches.UltraExpanded;
                     story_brief.TextAlignment = TextAlignment.Left;
                     story_brief.TextWrapping = TextWrapping.Wrap;
+                    story_brief.Width = 100;
+                    story_brief.Height = 100;
                     story_brief.TouchDown += new EventHandler<TouchEventArgs>(cell_TouchDown);
+                    story_brief.Margin = new Thickness(100, 0, 0, 0);
+                    //Rotate the Surface Button so that the highlight on the Glass Button is coming from that same place on all of them.
+                    double circleRadius = VisualizedCells.Height / 2;
+                    double radians = rotation * Math.PI / 180.0;
+                    double x = circleRadius * Math.Cos(radians);
+                    double y = circleRadius * Math.Sin(radians) + VisualizedCells.Height / 2;
+                    TranslateTransform tt = new TranslateTransform(x, y);
+                    story_brief.RenderTransformOrigin = new Point(0.0, 0.0);
+                    story_brief.RenderTransform = tt;
+
                     SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
-                    VisualizedCells.Items.Add(story_brief);
+                    VisualizedCells.Children.Add(story_brief);
+
+                    rotation += segment;
                 }
                 else
                 {
                     cell.Background = Brushes.LightYellow;
-
                 }
             }
         }
@@ -70,11 +88,14 @@ namespace TouchingStory
             TextBlock textblock = (TextBlock)sender;            
             story_brief.Name = textblock.Name + "_window";
             TextBlock test = (TextBlock) VisualizedCells.FindName(story_brief.Name);
-            
+
             if (SurfaceWindow1.homesurface.FindName(story_brief.Name) == null)
             {
+                
                 story_brief.Text = textblock.Text;
-                story_brief.Background = Brushes.Gray;
+                story_brief.Background = Brushes.WhiteSmoke;
+                story_brief.Foreground = Brushes.Black;
+                story_brief.Width = 500;
                 SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
                 story_brief.Foreground = Brushes.Black;
                 story_brief.Padding = new Thickness(5, 10, 5, 10);
@@ -83,7 +104,9 @@ namespace TouchingStory
                 story_brief.FontStretch = FontStretches.UltraExpanded;
                 story_brief.TextAlignment = TextAlignment.Left;
                 story_brief.TextWrapping = TextWrapping.Wrap;
-                VisualizedCells.Items.Add(story_brief);
+                VisualizedCells.Children.Add(story_brief);
+
+
             }
         }
 

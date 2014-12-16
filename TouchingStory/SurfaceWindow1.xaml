@@ -5,8 +5,7 @@
     Title="TouchingStory"
                  Name="HomeSurface"
     >
-        <Grid>
-             
+        <Grid>             
         <s:TagVisualizer 
             Name="MyTagVisualizer" 
             VerticalAlignment="Stretch"
