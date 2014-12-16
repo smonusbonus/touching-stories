@@ -7,7 +7,6 @@
 
     <Canvas Name="VisualizedCells"
             Height="600"
-            Width="600"
-            Background="Black">       
+            Width="600">       
     </Canvas>
 </s:TagVisualization>
