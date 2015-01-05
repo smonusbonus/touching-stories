@@ -60,6 +60,7 @@ namespace TouchingStory
             
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
+            Existed("aa");
         }
 
         /// <summary>
@@ -228,6 +229,22 @@ namespace TouchingStory
                 default:
                     break;
             }
+        } 
+        
+        private void OnVisualizationRemoved(object sender, TagVisualizerEventArgs e)
+        {
+            TagVisualizer tagvisualizer = (TagVisualizer)e.Source;
+            
+            TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;
+            
+        }
+
+        public Boolean Existed(string story_name)
+        {
+            ms = ms;
+            homesurface = homesurface;
+            int a = 1;
+            return true;
         }
 
     }
