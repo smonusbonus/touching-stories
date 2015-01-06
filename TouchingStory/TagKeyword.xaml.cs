@@ -31,24 +31,43 @@ namespace TouchingStory
 
         private void OnVisualizationAdded(object sender, TagVisualizerEventArgs e)
         {
+
      
         }
 
         private void TagKeyword_Loaded(object sender, RoutedEventArgs e)
         {
+
+            //TODO: customize TagKeyword's UI based on this.VisualizedTag here
+
             int[] storyids = TouchingStory.SurfaceWindow1.listOfIds;
             List<Story> story_list = TouchingStory.SurfaceWindow1.stories;
 
             double segment = 360.0 / storyids.Length;
             double rotation = 0.0;
-
+            string value = this.VisualizedTag.Value.ToString();
+            
             for (byte k = 0; k < storyids.Length; k++)   
-            {               
+            {
+                //MyTagVisualization parent = (TagVisualization)VisualizedCells.Parent;
                 TextBlock story_brief = new TextBlock();                
                 Story story = story_list.Find(x => x.id == storyids[k]);
                 story_brief.Name = "ID" + story.id.ToString();
-                TextBlock cell = (TextBlock)SurfaceWindow1.homesurface.FindName(story_brief.Name);
-                if (cell == null)
+                Boolean story_existed = false;
+                int count = this.Visualizer.ActiveVisualizations.Count;
+                TextBlock cell = null;
+                for (int i = 0; i < count; i++)
+                {
+                    TagKeyword tk = (TagKeyword)this.Visualizer.ActiveVisualizations[i];
+                    cell = (TextBlock)tk.FindName(story_brief.Name);
+                    if (cell != null)
+                    {
+                        story_existed = true;
+                        break;
+                    }
+                    
+                }
+                if (story_existed == false)
                 {
                     story_brief.Text = StringTool.Truncate(story.text, 60);
                     story_brief.Background = Brushes.LightBlue;
@@ -73,6 +92,7 @@ namespace TouchingStory
                     story_brief.RenderTransformOrigin = new Point(0.0, 0.0);
                     story_brief.RenderTransform = tt;
 
+
                     //draw a line from element to tagcenter
 
                     // Add a Line Element
@@ -88,6 +108,8 @@ namespace TouchingStory
                     VisualizedCells.Children.Add(myLine);
 
                     SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
+
+                    VisualizedCells.RegisterName(story_brief.Name, story_brief);
                     VisualizedCells.Children.Add(story_brief);
 
                     rotation += segment;

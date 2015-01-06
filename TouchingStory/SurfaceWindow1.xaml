@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:s="http://schemas.microsoft.com/surface/2008"
     Title="TouchingStory"
-                 Name="HomeSurface"
+    Name="HomeSurface"
     >
         <Grid>             
         <s:TagVisualizer 
@@ -12,8 +12,8 @@
             HorizontalAlignment="Stretch"
             Background="White" 
             Height="Auto" Width="Auto"
-            VisualizationAdded="OnVisualizationAdded">
+            VisualizationAdded="OnVisualizationAdded"           
+            >
         </s:TagVisualizer>
-
     </Grid>
 </s:SurfaceWindow>
