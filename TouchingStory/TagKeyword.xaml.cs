@@ -28,12 +28,14 @@ namespace TouchingStory
             InitializeComponent();
             
         }
- 
+
+        private void OnVisualizationAdded(object sender, TagVisualizerEventArgs e)
+        {
+     
+        }
+
         private void TagKeyword_Loaded(object sender, RoutedEventArgs e)
         {
-            //TODO: customize TagKeyword's UI based on this.VisualizedTag here
-            
-
             int[] storyids = TouchingStory.SurfaceWindow1.listOfIds;
             List<Story> story_list = TouchingStory.SurfaceWindow1.stories;
 
@@ -70,6 +72,20 @@ namespace TouchingStory
                     TranslateTransform tt = new TranslateTransform(x, y);
                     story_brief.RenderTransformOrigin = new Point(0.0, 0.0);
                     story_brief.RenderTransform = tt;
+
+                    //draw a line from element to tagcenter
+
+                    // Add a Line Element
+                    var myLine = new Line();
+                    myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
+                    myLine.X1 = 300;
+                    myLine.X2 = x + 240 + 50;
+                    myLine.Y1 = 300;
+                    myLine.Y2 = y - 50 + 50;
+                    myLine.HorizontalAlignment = HorizontalAlignment.Left;
+                    myLine.VerticalAlignment = VerticalAlignment.Center;
+                    myLine.StrokeThickness = 10;
+                    VisualizedCells.Children.Add(myLine);
 
                     SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
                     VisualizedCells.Children.Add(story_brief);
