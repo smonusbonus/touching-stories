@@ -5,9 +5,9 @@
     Title="TouchingStory"
     Name="HomeSurface"
     >
-        <Grid>
-        <s:ScatterView Name="MainScatterView"></s:ScatterView>
-            <s:TagVisualizer 
+   
+    <Grid Name="MainGridView">        
+        <s:TagVisualizer 
             Name="MyTagVisualizer" 
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"
