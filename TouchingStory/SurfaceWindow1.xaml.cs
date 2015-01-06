@@ -134,7 +134,8 @@ namespace TouchingStory
         public List<Story> LoadJson()
         {
             // the stories.json is located in \TouchingStory\bin\Debug
-            using (StreamReader r = new StreamReader("stories.json"))
+            //using (StreamReader r = new StreamReader("stories.json"))
+            using (StreamReader r = new StreamReader("stories_with_titles.json"))
             {
                 // to use JsonConvert you need to install Nuget Package Manager (google how to do it) and then in this Manager install "Newtonsoft Json" package
                 string json = r.ReadToEnd();
@@ -152,13 +153,22 @@ namespace TouchingStory
             for(byte i = 0; i < stories.Count; i++) 
             {
                 //System.Diagnostics.Debug.WriteLine("i: " + i + " id: " + stories[i].id + " subgenre: " + stories[i].subgenre);
-
-                foreach(string tag in stories[i].tags) 
+                
+                // make sure there's not more than 10 stories per tag, otherwise it gets too crowded on the screen
+                if (idList.Count() > 10)
                 {
-                    if(tag == matchTag)
+                    break;
+                }
+                else
+                {
+                    foreach (string tag in stories[i].tags)
                     {
-                        System.Diagnostics.Debug.WriteLine("matching tag " + tag);
-                        idList.Add(stories[i].id);
+                        if (tag == matchTag)
+                        {
+                            System.Diagnostics.Debug.WriteLine(stories[i].id);
+                            System.Diagnostics.Debug.WriteLine("matching tag " + tag);
+                            idList.Add(stories[i].id);
+                        }
                     }
                 }
             }

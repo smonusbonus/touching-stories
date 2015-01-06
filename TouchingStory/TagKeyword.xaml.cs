@@ -69,7 +69,7 @@ namespace TouchingStory
                 }
                 if (story_existed == false)
                 {
-                    story_brief.Text = StringTool.Truncate(story.text, 60);
+                    story_brief.Text = story.title;
                     story_brief.Background = Brushes.LightBlue;
                     story_brief.Foreground = Brushes.Black;
                     story_brief.Padding = new Thickness(5, 10, 5, 10);
