@@ -35,7 +35,7 @@ namespace TouchingStory
         public static int[] listOfIds; 
         public static TagVisualizer ms;
         public static SurfaceWindow homesurface;
-        public static ScatterView mainSV;
+        public static Grid mainGridView;
         
         public SurfaceWindow1()
         {
@@ -55,7 +55,7 @@ namespace TouchingStory
             }*/
             ms = MyTagVisualizer;
             homesurface = HomeSurface;
-            mainSV = MainScatterView;
+            mainGridView = MainGridView;
             
             // Testing: this is a test to display one element of the json file 
             

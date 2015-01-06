@@ -123,18 +123,29 @@ namespace TouchingStory
 
         private void cell_TouchDown(object sender, TouchEventArgs e)
         {
+            
             TextBlock story_brief = new TextBlock();
             TextBlock textblock = (TextBlock)sender;            
             story_brief.Name = textblock.Name + "_window";
-            TextBlock test = (TextBlock) VisualizedCells.FindName(story_brief.Name);
+            TextBlock story_window = (TextBlock)SurfaceWindow1.homesurface.FindName(story_brief.Name);
 
-            if (SurfaceWindow1.homesurface.FindName(story_brief.Name) == null)
+            if (story_window == null)
             {
-                
+                ScatterView story_scatter_view = new ScatterView();                
+                StackPanel stackpanel = new StackPanel();
+                stackpanel.Width = 200;
+                stackpanel.Background = Brushes.WhiteSmoke;
+                Button closingButton = new Button();
+                closingButton.TouchDown += new EventHandler<TouchEventArgs>(closeStoryWindow);                
+                closingButton.Content = "X";
+                closingButton.FontSize = 20;
+                closingButton.Margin = new Thickness(0, 5, 5, 0);
+                closingButton.Padding = new Thickness(5, 0, 5, 0);
+                closingButton.HorizontalAlignment = HorizontalAlignment.Right;
                 story_brief.Text = textblock.Text;
                 story_brief.Background = Brushes.WhiteSmoke;
                 story_brief.Foreground = Brushes.Black;
-                story_brief.Width = 500;
+                //story_brief.Width = 200;
                 SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
                 story_brief.Foreground = Brushes.Black;
                 story_brief.Padding = new Thickness(5, 10, 5, 10);
@@ -143,10 +154,29 @@ namespace TouchingStory
                 story_brief.FontStretch = FontStretches.UltraExpanded;
                 story_brief.TextAlignment = TextAlignment.Left;
                 story_brief.TextWrapping = TextWrapping.Wrap;
-                VisualizedCells.Children.Add(story_brief);
-
-
+                
+                stackpanel.Children.Add(closingButton);
+                stackpanel.Children.Add(story_brief);
+                story_scatter_view.Items.Add(stackpanel);
+                SurfaceWindow1.mainGridView.Children.Add(story_scatter_view);
             }
+            else
+            {
+                StackPanel sp = (StackPanel)story_window.Parent;
+                ScatterView sv = (ScatterView)sp.Parent;
+                sv.Opacity = 1;
+            }
+        }
+
+        private void closeStoryWindow(object sender, TouchEventArgs e)
+        {
+            
+            Button test_sender = (Button)sender;
+            StackPanel sp = (StackPanel)test_sender.Parent;
+            ScatterView sv = (ScatterView)sp.Parent;
+            sv.Opacity = 0;
+            //SurfaceWindow1.mainGridView.Children.Remove(sv);
+            int a = 0;
         }
 
     }
