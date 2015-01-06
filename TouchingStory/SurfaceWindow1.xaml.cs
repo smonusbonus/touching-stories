@@ -61,8 +61,7 @@ namespace TouchingStory
             
             
             // Add handlers for window availability events
-            AddWindowAvailabilityHandlers();
-            Existed("aa");
+            AddWindowAvailabilityHandlers();            
         }
 
         /// <summary>

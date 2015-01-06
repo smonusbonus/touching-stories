@@ -80,7 +80,7 @@
     <Compile Include="TagKeyword.xaml.cs">
       <DependentUpon>TagKeyword.xaml</DependentUpon>
     </Compile>
-    <Page Include="StyleDictionary.xaml">
+    <Page Include="Resources\StyleDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
