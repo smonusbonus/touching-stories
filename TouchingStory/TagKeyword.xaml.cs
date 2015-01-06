@@ -107,7 +107,7 @@ namespace TouchingStory
                     myLine.StrokeThickness = 10;
                     VisualizedCells.Children.Add(myLine);
 
-                    SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
+                    //SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
 
                     VisualizedCells.RegisterName(story_brief.Name, story_brief);
                     VisualizedCells.Children.Add(story_brief);
