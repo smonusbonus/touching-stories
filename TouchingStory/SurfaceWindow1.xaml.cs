@@ -311,8 +311,7 @@ namespace TouchingStory
         private void OnVisualizationMoved(object sender, TagVisualizerEventArgs e)
         {
             TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;
-            string text = "success";
-            int a = 0;
+
         }
 
     }
