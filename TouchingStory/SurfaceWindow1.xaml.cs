@@ -174,6 +174,43 @@ namespace TouchingStory
 
             return idList.ToArray();
         }
+
+
+        // this function filters the json data based on a tag-name
+        public int[] FilterJsonBy(List<Story> stories, string matchTag, string filterBy)
+        {
+            List<int> listOfStoryIds = new List<int>();
+
+            System.Diagnostics.Debug.WriteLine("executed");
+
+            for (byte i = 0; i < stories.Count; i++)
+            {
+                //System.Diagnostics.Debug.WriteLine(stories[i].id);
+                // make sure there's not more than 10 stories per tag, otherwise it gets too crowded on the screen
+                if (listOfStoryIds.Count() > 10)
+                {
+                    break;
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine(stories[i].character);
+                    if (filterBy == "character" && stories[i].character == matchTag)
+                    {
+                        System.Diagnostics.Debug.WriteLine(stories[i].id);
+                        listOfStoryIds.Add(stories[i].id);
+                    }
+                    System.Diagnostics.Debug.WriteLine(stories[i].location);
+                    if (filterBy == "location" && stories[i].location == matchTag)
+                    {
+                        System.Diagnostics.Debug.WriteLine(stories[i].id);
+                        listOfStoryIds.Add(stories[i].id);
+                    }
+                }
+            }
+
+            System.Diagnostics.Debug.WriteLine(listOfStoryIds);
+            return listOfStoryIds.ToArray();
+        }
         
         private void InitializeDefinitions()
         {
@@ -253,10 +290,12 @@ namespace TouchingStory
             switch (story.VisualizedTag.Value)
             {
                 case 0xC0:
-                    listOfIds = FilterJson(story_list, "dood");
+                    //listOfIds = FilterJson(story_list, "dood");
+                    listOfIds = FilterJsonBy(story_list, "heks", "character");
                     break;
                 case 0xC1:
-                    listOfIds = FilterJson(story_list, "hekserij");
+                    //listOfIds = FilterJson(story_list, "hekserij");
+                    listOfIds = FilterJsonBy(story_list, "dorp", "location");
                     break;
                 case 3:
                     break;
