@@ -37,6 +37,8 @@ namespace TouchingStory
      
         }
 
+
+
         private void TagKeyword_Loaded(object sender, RoutedEventArgs e)
         {
 
@@ -44,7 +46,7 @@ namespace TouchingStory
 
             int[] storyids = TouchingStory.SurfaceWindow1.listOfIds;
             story_list = TouchingStory.SurfaceWindow1.stories;
-
+            
             double segment = 360.0 / storyids.Length;
             double rotation = 0.0;
             string value = this.VisualizedTag.Value.ToString();
@@ -135,8 +137,8 @@ namespace TouchingStory
 
             if (story_window == null)
             {
-                ScatterView story_scatter_view = new ScatterView();
-                StackPanel stackpanel = new StackPanel();             
+                ScatterView story_scatter_view = new ScatterView();                
+                StackPanel stackpanel = new StackPanel();
                 stackpanel.Background = Brushes.WhiteSmoke;
                 Button closingButton = new Button();
                 closingButton.TouchDown += new EventHandler<TouchEventArgs>(closeStoryWindow);                
@@ -150,24 +152,26 @@ namespace TouchingStory
                 story_brief.Background = Brushes.WhiteSmoke;
                 story_brief.Foreground = Brushes.Black;
                 //story_brief.MinWidth = 300;
-                SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
-                story_brief.Foreground = Brushes.Black;
+                SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);                
                 story_brief.Padding = new Thickness(5, 10, 5, 10);
                 story_brief.LineHeight = Double.NaN;
                 story_brief.FontSize = 14;
                 story_brief.FontStretch = FontStretches.UltraExpanded;
                 story_brief.TextAlignment = TextAlignment.Left;
-                story_brief.TextWrapping = TextWrapping.Wrap;
-                
+                 story_brief.TextWrapping = TextWrapping.Wrap;
+                                
                 stackpanel.Children.Add(closingButton);
                 stackpanel.Children.Add(story_brief);
                 ScatterViewItem item = new ScatterViewItem();
-                item.Style = (Style)Resources["ScatterViewItemStyle"];
+                item.CanScale = true;
+                
+                item.Style = (Style)Application.Current.FindResource("ScatterViewItemStyle");
                 item.Content = stackpanel;
-                story_scatter_view.Items.Add(item); 
-
-               // story_scatter_view.Items.Add(stackpanel);
+                story_scatter_view.Items.Add(item);
+                //TagKeyword test = (TagKeyword)this.Visualizer.ActiveVisualizations[0];
+               
                 SurfaceWindow1.mainGridView.Children.Add(story_scatter_view);
+               
             }
             else
             {
@@ -186,7 +190,7 @@ namespace TouchingStory
             ScatterViewItem svi = (ScatterViewItem)sp.Parent;
             ScatterView sv = (ScatterView)svi.Parent;
             sv.Opacity = 0;
-            //SurfaceWindow1.mainGridView.Children.Remove(sv);
+            //SurfaceWindow1.mainGridView.Children.Remove(sv); 
             int a = 0;
         }
 

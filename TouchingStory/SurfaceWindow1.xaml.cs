@@ -275,12 +275,11 @@ namespace TouchingStory
             
         }
 
-        public Boolean Existed(string story_name)
+        private void OnVisualizationMoved(object sender, TagVisualizerEventArgs e)
         {
-            ms = ms;
-            homesurface = homesurface;
-            int a = 1;
-            return true;
+            TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;
+            string text = "success";
+            int a = 0;
         }
 
     }

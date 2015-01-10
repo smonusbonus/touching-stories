@@ -14,6 +14,7 @@
             Background="White" 
             Height="Auto" Width="Auto"
             VisualizationAdded="OnVisualizationAdded"           
+            VisualizationMoved="OnVisualizationMoved" 
             >
         </s:TagVisualizer>
     </Grid>

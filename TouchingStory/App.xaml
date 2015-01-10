@@ -3,12 +3,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     StartupUri="SurfaceWindow1.xaml"
     >
-    <Application.Resources>
-      <ResourceDictionary>
-        <ResourceDictionary.MergedDictionaries>
-          <ResourceDictionary Source="/Microsoft.Surface.Presentation.Generic;v2.0.0.0;31bf3856ad364e35;component/themes\styles.xaml"/>
-                <ResourceDictionary Source="Resources/StyleDictionary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+    <Application.Resources>      
+      <ResourceDictionary>            
+          <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Microsoft.Surface.Presentation.Generic;v2.0.0.0;31bf3856ad364e35;component/themes\styles.xaml"/>
+                <ResourceDictionary Source="StyleDictionary.xaml" />
+          </ResourceDictionary.MergedDictionaries>
       </ResourceDictionary>
     </Application.Resources>
 </Application>
