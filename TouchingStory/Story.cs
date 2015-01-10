@@ -12,6 +12,9 @@ namespace TouchingStory
         /// </summary>
         public string title;
         public string text;
+        public string concept;
+        public string character;
+        public string location;
         public int id;
         public string subgenre;
         public List<string> tags;
