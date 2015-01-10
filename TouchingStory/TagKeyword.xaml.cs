@@ -31,10 +31,23 @@ namespace TouchingStory
             
         }
 
-        private void OnVisualizationAdded(object sender, TagVisualizerEventArgs e)
+        private void OnPreviewVisualizationMoved(object sender, TagVisualizerEventArgs e)
         {
+            //draw a connection line from tagcenter to other tagcenter
+            var conLine = new Line();
+            GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
+            Point position = gt.Transform(new Point(0d, 0d));
+            //Point position = VisualizedCells.PointToScreen(new Point(0d, 0d));
+            conLine.Stroke = System.Windows.Media.Brushes.Red;
+            conLine.X1 = position.X + 305;
+            conLine.X2 = position.X + 355;
+            conLine.Y1 = position.Y - 105;
+            conLine.Y2 = position.Y - 105;
+            conLine.HorizontalAlignment = HorizontalAlignment.Left;
+            conLine.VerticalAlignment = VerticalAlignment.Center;
+            conLine.StrokeThickness = 10;
 
-     
+            SurfaceWindow1.mainGridView.Children.Add(conLine);  
         }
 
         private void TagKeyword_Loaded(object sender, RoutedEventArgs e)
@@ -94,10 +107,23 @@ namespace TouchingStory
                     story_brief.RenderTransformOrigin = new Point(0.0, 0.0);
                     story_brief.RenderTransform = tt;
 
+                    //draw a  line from tagcenter of 50 px
+                    var conLine = new Line();
+                    GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
+                    Point position = gt.Transform(new Point (0d,0d));
+                    //Point position = VisualizedCells.PointToScreen(new Point(0d, 0d));
+                    conLine.Stroke = System.Windows.Media.Brushes.Red;
+                    conLine.X1 = position.X+305;
+                    conLine.X2 = position.X+355;
+                    conLine.Y1 = position.Y - 105;
+                    conLine.Y2 = position.Y - 105;
+                    conLine.HorizontalAlignment = HorizontalAlignment.Left;
+                    conLine.VerticalAlignment = VerticalAlignment.Center;
+                    conLine.StrokeThickness = 10;
+                    
+                    SurfaceWindow1.mainGridView.Children.Add(conLine);
 
-                    //draw a line from element to tagcenter
-
-                    // Add a Line Element
+                    // Add a Line Element from tagcenter to textbox
                     var myLine = new Line();
                     myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
                     myLine.X1 = 300;
