@@ -31,28 +31,6 @@ namespace TouchingStory
             
         }
 
-        // helper function to get all children of an element (used for finding all lines)
-        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                    {
-                        yield return (T)child;
-                    }
-
-                    // Use this if you also want children of children
-                    //foreach (T childOfChild in FindVisualChildren<T>(child))
-                    //{
-                    //    yield return childOfChild;
-                    //}
-                }
-            }
-        }
-
         private void OnPreviewVisualizationMoved(object sender, TagVisualizerEventArgs e)
         {
             //draw a connection line from tagcenter to other tagcenter
@@ -102,6 +80,12 @@ namespace TouchingStory
                     if (cell != null)
                     {
                         story_existed = true;
+                        if (SurfaceWindow1.commonStories.ContainsKey(story_brief.Name) == false)
+                        {
+                            SurfaceWindow1.addTagID_commonStories(story_brief.Name, tk.Name);
+                        }
+                        SurfaceWindow1.addTagID_commonStories(story_brief.Name, this.Name);
+                        //Dictionary<String, List<String>> aaa = SurfaceWindow1.commonStories;
                         break;
                     }
                     
@@ -131,35 +115,20 @@ namespace TouchingStory
                     story_brief.RenderTransformOrigin = new Point(0.0, 0.0);
                     story_brief.RenderTransform = tt;
 
-                    // draw connection lines
-
-                    // To do: Get list with lines to draw
-
-                    // Delete all lines within the grid
-                    foreach (Line ln in FindVisualChildren<Line>(SurfaceWindow1.mainGridView))
-                    {
-                        SurfaceWindow1.mainGridView.Children.Remove(ln);
-                    }
-
-                    // To do: Draw the new lines
-
-                    // Testline
+                    //draw a  line from tagcenter of 50 px
                     var conLine = new Line();
-                    
-                    // To do: Get position textblock with certain id
-
                     GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
-                    Point position = gt.Transform(new Point(0d, 0d));
+                    Point position = gt.Transform(new Point (0d,0d));
                     //Point position = VisualizedCells.PointToScreen(new Point(0d, 0d));
                     conLine.Stroke = System.Windows.Media.Brushes.Red;
-                    conLine.X1 = position.X + 305;
-                    conLine.X2 = position.X + 355;
+                    conLine.X1 = position.X+305;
+                    conLine.X2 = position.X+355;
                     conLine.Y1 = position.Y - 105;
                     conLine.Y2 = position.Y - 105;
                     conLine.HorizontalAlignment = HorizontalAlignment.Left;
                     conLine.VerticalAlignment = VerticalAlignment.Center;
                     conLine.StrokeThickness = 10;
-
+                    
                     SurfaceWindow1.mainGridView.Children.Add(conLine);
 
                     // Add a Line Element from tagcenter to textbox
@@ -183,6 +152,7 @@ namespace TouchingStory
                 }
                 else
                 {
+
                     cell.Background = Brushes.LightYellow;
                 }
             }
@@ -254,7 +224,6 @@ namespace TouchingStory
             ScatterView sv = (ScatterView)svi.Parent;
             sv.Opacity = 0;
             //SurfaceWindow1.mainGridView.Children.Remove(sv); 
-            int a = 0;
         }
 
     }
