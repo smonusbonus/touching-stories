@@ -231,8 +231,16 @@ namespace TouchingStory
 
         private void OnVisualizationAdded(object sender, TagVisualizerEventArgs e)
         {
-            List<Story> story_list = LoadJson();
+            // Find value object and convert to string to use as name
+            var PlacedTag = e.TagVisualization.VisualizedTag;
+            var ObjectName = "tag_" + PlacedTag.Value.ToString();
+            // Register name of object for later use with registername(name, object)
             TagKeyword story = (TagKeyword)e.TagVisualization;
+            story.Name = ObjectName;
+            SurfaceWindow1.mainGridView.RegisterName(ObjectName, story);
+
+            List<Story> story_list = LoadJson();
+            
             switch (story.VisualizedTag.Value)
             {
                 case 0:

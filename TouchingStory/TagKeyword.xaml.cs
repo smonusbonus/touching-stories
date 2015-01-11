@@ -16,6 +16,7 @@ using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
 
 
+
 namespace TouchingStory
 {
     /// <summary>
@@ -23,6 +24,7 @@ namespace TouchingStory
     /// </summary>
     public partial class TagKeyword : TagVisualization
     {
+        public static int test = 0;
 
         public List<Story> story_list;
         public TagKeyword()
@@ -30,6 +32,7 @@ namespace TouchingStory
             InitializeComponent();
             
         }
+
 
         // helper function to get all children of an element (used for finding all lines)
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
@@ -52,6 +55,7 @@ namespace TouchingStory
                 }
             }
         }
+
 
         private void OnPreviewVisualizationMoved(object sender, TagVisualizerEventArgs e)
         {
@@ -102,6 +106,12 @@ namespace TouchingStory
                     if (cell != null)
                     {
                         story_existed = true;
+                        if (SurfaceWindow1.commonStories.ContainsKey(story_brief.Name) == false)
+                        {
+                            SurfaceWindow1.addTagID_commonStories(story_brief.Name, tk.Name);
+                        }
+                        SurfaceWindow1.addTagID_commonStories(story_brief.Name, this.Name);
+                        //Dictionary<String, List<String>> aaa = SurfaceWindow1.commonStories;
                         break;
                     }
                     
@@ -131,37 +141,6 @@ namespace TouchingStory
                     story_brief.RenderTransformOrigin = new Point(0.0, 0.0);
                     story_brief.RenderTransform = tt;
 
-                    // draw connection lines
-
-                    // To do: Get list with lines to draw
-
-                    // Delete all lines within the grid
-                    foreach (Line ln in FindVisualChildren<Line>(SurfaceWindow1.mainGridView))
-                    {
-                        SurfaceWindow1.mainGridView.Children.Remove(ln);
-                    }
-
-                    // To do: Draw the new lines
-
-                    // Testline
-                    var conLine = new Line();
-                    
-                    // To do: Get position textblock with certain id
-
-                    GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
-                    Point position = gt.Transform(new Point(0d, 0d));
-                    //Point position = VisualizedCells.PointToScreen(new Point(0d, 0d));
-                    conLine.Stroke = System.Windows.Media.Brushes.Red;
-                    conLine.X1 = position.X + 305;
-                    conLine.X2 = position.X + 355;
-                    conLine.Y1 = position.Y - 105;
-                    conLine.Y2 = position.Y - 105;
-                    conLine.HorizontalAlignment = HorizontalAlignment.Left;
-                    conLine.VerticalAlignment = VerticalAlignment.Center;
-                    conLine.StrokeThickness = 10;
-
-                    SurfaceWindow1.mainGridView.Children.Add(conLine);
-
                     // Add a Line Element from tagcenter to textbox
                     var myLine = new Line();
                     myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
@@ -183,9 +162,13 @@ namespace TouchingStory
                 }
                 else
                 {
+
                     cell.Background = Brushes.LightYellow;
                 }
             }
+
+            // draw connection lines
+            DrawConnections();
         }
 
         private void cell_TouchDown(object sender, TouchEventArgs e)
@@ -321,7 +304,55 @@ namespace TouchingStory
             ScatterView sv = (ScatterView)svi.Parent;
             sv.Opacity = 0;
             //SurfaceWindow1.mainGridView.Children.Remove(sv); 
-            int a = 0;
+        }
+
+        public static void DrawConnections()
+        {
+
+            var list = SurfaceWindow1.commonStories;
+
+            // To do: Get list with lines to draw
+
+            // Delete all lines within the grid
+            foreach (Line ln in FindVisualChildren<Line>(SurfaceWindow1.mainGridView))
+            {
+                SurfaceWindow1.mainGridView.Children.Remove(ln);
+            }
+
+            // code for debugging
+            test = test + 1;
+            if (test == 3)
+            {
+                var justsomething = "justaline";
+
+
+                // To do: Draw the new lines
+
+                // To do: Get position textblock with certain id from a certain tag
+
+                TagVisualization TagVis = (TagVisualization)SurfaceWindow1.mainGridView.FindName("tag_1");
+
+                //var TextboxWithStory = (TextBox)TagVisualization.FindName("Field_CompanyName");
+
+
+                // Testline draw line from tag 0 to story with id .. in tag 2
+                var conLine = new Line();
+
+            }
+
+            //GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
+            //Point position = gt.Transform(new Point(0d, 0d));
+            //Point position = VisualizedCells.PointToScreen(new Point(0d, 0d));
+            //conLine.Stroke = System.Windows.Media.Brushes.Red;
+            //conLine.X1 = position.X + 305;
+            //conLine.X2 = position.X + 355;
+            //conLine.Y1 = position.Y - 105;
+            //conLine.Y2 = position.Y - 105;
+            //conLine.HorizontalAlignment = HorizontalAlignment.Left;
+            //conLine.VerticalAlignment = VerticalAlignment.Center;
+            //conLine.StrokeThickness = 10;
+
+            //SurfaceWindow1.mainGridView.Children.Add(conLine);
         }
 
     }
