@@ -256,38 +256,43 @@ namespace TouchingStory
 
             // code for debugging
             test = test + 1;
-            if (test == 3)
+            if (test == 2)
             {
-                var justsomething = "justaline";
-
 
                 // To do: Draw the new lines
+                var list1 = SurfaceWindow1.commonStories;
 
                 // To do: Get position textblock with certain id from a certain tag
 
-                TagVisualization TagVis = (TagVisualization)SurfaceWindow1.mainGridView.FindName("tag_1");
+                TagKeyword TagVis9 = (TagKeyword)SurfaceWindow1.mainGridView.FindName("tag_9");
+
+                TagKeyword TagVis0 = (TagKeyword)SurfaceWindow1.mainGridView.FindName("tag_0");
+
+                TextBlock textblock = (TextBlock)TagVis0.VisualizedCells.FindName("ID42714");
 
                 //var TextboxWithStory = (TextBox)TagVisualization.FindName("Field_CompanyName");
-
 
                 // Testline draw line from tag 0 to story with id .. in tag 2
                 var conLine = new Line();
 
+                //GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
+                //Point position = gt.Transform(new Point(0d, 0d));
+
+                Point positionTag = TagVis9.VisualizedCells.PointToScreen(new Point(0d, 0d));
+
+                Point positionBlock = textblock.PointToScreen(new Point(0d, 0d));
+
+                conLine.Stroke = System.Windows.Media.Brushes.Red;
+                conLine.X1 = positionTag.X + 300;
+                conLine.X2 = positionBlock.X;
+                conLine.Y1 = positionTag.Y + 190;
+                conLine.Y2 = positionBlock.Y - 40;
+                conLine.HorizontalAlignment = HorizontalAlignment.Left;
+                conLine.VerticalAlignment = VerticalAlignment.Center;
+                conLine.StrokeThickness = 10;
+
+                SurfaceWindow1.mainGridView.Children.Add(conLine);
             }
-
-            //GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
-            //Point position = gt.Transform(new Point(0d, 0d));
-            //Point position = VisualizedCells.PointToScreen(new Point(0d, 0d));
-            //conLine.Stroke = System.Windows.Media.Brushes.Red;
-            //conLine.X1 = position.X + 305;
-            //conLine.X2 = position.X + 355;
-            //conLine.Y1 = position.Y - 105;
-            //conLine.Y2 = position.Y - 105;
-            //conLine.HorizontalAlignment = HorizontalAlignment.Left;
-            //conLine.VerticalAlignment = VerticalAlignment.Center;
-            //conLine.StrokeThickness = 10;
-
-            //SurfaceWindow1.mainGridView.Children.Add(conLine);
         }
 
     }
