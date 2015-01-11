@@ -41,24 +41,10 @@ namespace TouchingStory
         {
             InitializeComponent();
             InitializeDefinitions();
-
-            // load the json file into Story Class when starting the app
-            //List<Story> story_list = LoadJson();
-
-            // filter json based on keyword
-            //listOfIds = FilterJson(story_list, "dood");
             
-            
-            // print ids of corresponding keyword
-            /*foreach(int id in listOfIds) {
-                System.Diagnostics.Debug.WriteLine(id);
-            }*/
             ms = MyTagVisualizer;
             homesurface = HomeSurface;
             mainGridView = MainGridView;
-            
-            // Testing: this is a test to display one element of the json file 
-            
             
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();            
@@ -176,12 +162,11 @@ namespace TouchingStory
         }
 
 
-        // this function filters the json data based on a tag-name
+        // this function filters the json data based on a tag-name and a filterBy parameter
+        // which either can be "location" or "character"
         public int[] FilterJsonBy(List<Story> stories, string matchTag, string filterBy)
         {
             List<int> listOfStoryIds = new List<int>();
-
-            System.Diagnostics.Debug.WriteLine("executed");
 
             for (byte i = 0; i < stories.Count; i++)
             {
@@ -193,16 +178,12 @@ namespace TouchingStory
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine(stories[i].character);
                     if (filterBy == "character" && stories[i].character == matchTag)
                     {
-                        System.Diagnostics.Debug.WriteLine(stories[i].id);
                         listOfStoryIds.Add(stories[i].id);
                     }
-                    System.Diagnostics.Debug.WriteLine(stories[i].location);
                     if (filterBy == "location" && stories[i].location == matchTag)
                     {
-                        System.Diagnostics.Debug.WriteLine(stories[i].id);
                         listOfStoryIds.Add(stories[i].id);
                     }
                 }
@@ -234,6 +215,7 @@ namespace TouchingStory
             MyTagVisualizer.Definitions.Add(tagDef);
         }
         
+        // here the tagged object definitions are executed
         private void InitializeDefinitions()
         {
             for (int i = 0; i < 15; i++)
