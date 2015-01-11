@@ -16,6 +16,7 @@ using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
 
 
+
 namespace TouchingStory
 {
     /// <summary>
@@ -23,6 +24,7 @@ namespace TouchingStory
     /// </summary>
     public partial class TagKeyword : TagVisualization
     {
+        public static int test = 0;
 
         public List<Story> story_list;
         public TagKeyword()
@@ -30,6 +32,30 @@ namespace TouchingStory
             InitializeComponent();
             
         }
+
+
+        // helper function to get all children of an element (used for finding all lines)
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    // Use this if you also want children of children
+                    //foreach (T childOfChild in FindVisualChildren<T>(child))
+                    //{
+                    //    yield return childOfChild;
+                    //}
+                }
+            }
+        }
+
 
         private void OnPreviewVisualizationMoved(object sender, TagVisualizerEventArgs e)
         {
@@ -115,22 +141,6 @@ namespace TouchingStory
                     story_brief.RenderTransformOrigin = new Point(0.0, 0.0);
                     story_brief.RenderTransform = tt;
 
-                    //draw a  line from tagcenter of 50 px
-                    var conLine = new Line();
-                    GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
-                    Point position = gt.Transform(new Point (0d,0d));
-                    //Point position = VisualizedCells.PointToScreen(new Point(0d, 0d));
-                    conLine.Stroke = System.Windows.Media.Brushes.Red;
-                    conLine.X1 = position.X+305;
-                    conLine.X2 = position.X+355;
-                    conLine.Y1 = position.Y - 105;
-                    conLine.Y2 = position.Y - 105;
-                    conLine.HorizontalAlignment = HorizontalAlignment.Left;
-                    conLine.VerticalAlignment = VerticalAlignment.Center;
-                    conLine.StrokeThickness = 10;
-                    
-                    SurfaceWindow1.mainGridView.Children.Add(conLine);
-
                     // Add a Line Element from tagcenter to textbox
                     var myLine = new Line();
                     myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
@@ -156,6 +166,9 @@ namespace TouchingStory
                     cell.Background = Brushes.LightYellow;
                 }
             }
+
+            // draw connection lines
+            DrawConnections();
         }
 
         private void cell_TouchDown(object sender, TouchEventArgs e)
@@ -173,6 +186,7 @@ namespace TouchingStory
                 ScatterView story_scatter_view = new ScatterView();                
                 StackPanel stackpanel = new StackPanel();
                 stackpanel.Background = Brushes.WhiteSmoke;
+
                 Button closingButton = new Button();
                 closingButton.TouchDown += new EventHandler<TouchEventArgs>(closeStoryWindow);                
                 closingButton.Content = "X";
@@ -180,6 +194,7 @@ namespace TouchingStory
                 closingButton.Margin = new Thickness(0, 5, 5, 0);
                 closingButton.Padding = new Thickness(5, 0, 5, 0);
                 closingButton.HorizontalAlignment = HorizontalAlignment.Right;
+
                 Story story = story_list.Find(x => x.id == story_id);
                 story_brief.Text = story.text;
                 story_brief.Background = Brushes.WhiteSmoke;
@@ -191,7 +206,7 @@ namespace TouchingStory
                 story_brief.FontSize = 14;
                 story_brief.FontStretch = FontStretches.UltraExpanded;
                 story_brief.TextAlignment = TextAlignment.Left;
-                 story_brief.TextWrapping = TextWrapping.Wrap;
+                story_brief.TextWrapping = TextWrapping.Wrap;
                                 
                 stackpanel.Children.Add(closingButton);
                 stackpanel.Children.Add(story_brief);
@@ -224,6 +239,48 @@ namespace TouchingStory
             ScatterView sv = (ScatterView)svi.Parent;
             sv.Opacity = 0;
             //SurfaceWindow1.mainGridView.Children.Remove(sv); 
+        }
+
+        public static void DrawConnections()
+        {
+            // To do: Get list with lines to draw
+
+            // Delete all lines within the grid
+            foreach (Line ln in FindVisualChildren<Line>(SurfaceWindow1.mainGridView))
+            {
+                SurfaceWindow1.mainGridView.Children.Remove(ln);
+            }
+
+            // code for debugging
+            test = test + 1;
+            if (test == 2)
+            {
+                var justsomething = "justaline";
+            }
+            // To do: Draw the new lines
+
+            // Testline draw line from tag 0 to story with id .. in tag 2
+            var conLine = new Line();
+
+            // To do: Get position textblock with certain id from a certain tag
+
+            TagVisualization TagVis = (TagVisualization)SurfaceWindow1.mainGridView.FindName("tag_1");
+
+            //var TextboxWithStory = (TextBox)this.FindName("Field_CompanyName");
+
+            //GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
+            //Point position = gt.Transform(new Point(0d, 0d));
+            //Point position = VisualizedCells.PointToScreen(new Point(0d, 0d));
+            //conLine.Stroke = System.Windows.Media.Brushes.Red;
+            //conLine.X1 = position.X + 305;
+            //conLine.X2 = position.X + 355;
+            //conLine.Y1 = position.Y - 105;
+            //conLine.Y2 = position.Y - 105;
+            //conLine.HorizontalAlignment = HorizontalAlignment.Left;
+            //conLine.VerticalAlignment = VerticalAlignment.Center;
+            //conLine.StrokeThickness = 10;
+
+            //SurfaceWindow1.mainGridView.Children.Add(conLine);
         }
 
     }
