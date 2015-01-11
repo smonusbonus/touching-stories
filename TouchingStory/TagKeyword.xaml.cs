@@ -175,6 +175,7 @@ namespace TouchingStory
         {
             
             TextBlock story_brief = new TextBlock();
+            TextBlock story_title = new TextBlock();
             TextBlock textblock = (TextBlock)sender;
             string id = textblock.Name.TrimStart(new Char[] { 'I', 'D' });
             int story_id = Int32.Parse(id);
@@ -184,37 +185,101 @@ namespace TouchingStory
             if (story_window == null)
             {
                 ScatterView story_scatter_view = new ScatterView();                
-                StackPanel stackpanel = new StackPanel();
-                stackpanel.Background = Brushes.WhiteSmoke;
 
+                // Create the Grid
+                Grid story_window_grid = new Grid();
+                //story_window_grid.Width = Double.NaN;
+                //story_window_grid.Height = 100;
+                story_window_grid.Background = Brushes.WhiteSmoke;
+                story_window_grid.HorizontalAlignment = HorizontalAlignment.Left;
+                story_window_grid.VerticalAlignment = VerticalAlignment.Top;
+                story_window_grid.ShowGridLines = true;
+
+                // Define the Columns
+                ColumnDefinition colDef1 = new ColumnDefinition();
+                ColumnDefinition colDef2 = new ColumnDefinition();
+                colDef1.Width = new GridLength(5, GridUnitType.Star);
+                colDef2.Width = new GridLength(2, GridUnitType.Star);
+                //colDef2.MinWidth = 50;
+                story_window_grid.ColumnDefinitions.Add(colDef1);
+                story_window_grid.ColumnDefinitions.Add(colDef2);
+
+                // Define the Rows
+                RowDefinition rowDef1 = new RowDefinition();
+                RowDefinition rowDef2 = new RowDefinition();
+                rowDef1.Height = new GridLength(1, GridUnitType.Star);
+                rowDef1.MinHeight = 40;
+                rowDef2.Height = new GridLength(9, GridUnitType.Star);
+                story_window_grid.RowDefinitions.Add(rowDef1);
+                story_window_grid.RowDefinitions.Add(rowDef2);
+
+                // Define the closing Button
                 Button closingButton = new Button();
                 closingButton.TouchDown += new EventHandler<TouchEventArgs>(closeStoryWindow);                
                 closingButton.Content = "X";
                 closingButton.FontSize = 20;
+                closingButton.Width = 30;
+                closingButton.Height = 30;
                 closingButton.Margin = new Thickness(0, 5, 5, 0);
                 closingButton.Padding = new Thickness(5, 0, 5, 0);
                 closingButton.HorizontalAlignment = HorizontalAlignment.Right;
+                Grid.SetRow(closingButton, 0);
+                Grid.SetColumn(closingButton, 1);
 
+                // Get story based on id
                 Story story = story_list.Find(x => x.id == story_id);
+
+                // create title text block
+                story_title.Text = story.title;
+                story_title.FontSize = 14;
+                story_title.FontWeight = FontWeights.Bold;
+                story_title.Padding = new Thickness(20, 20, 10, 0);
+                Grid.SetRow(story_title, 0);
+                Grid.SetColumn(story_title, 0);
+
+                // create story text block
                 story_brief.Text = story.text;
-                story_brief.Background = Brushes.WhiteSmoke;
                 story_brief.Foreground = Brushes.Black;
                 //story_brief.MinWidth = 300;
                 SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);                
-                story_brief.Padding = new Thickness(5, 10, 5, 10);
+                story_brief.Padding = new Thickness(20, 5, 30, 10);
                 story_brief.LineHeight = Double.NaN;
-                story_brief.FontSize = 14;
-                story_brief.FontStretch = FontStretches.UltraExpanded;
+                story_brief.FontSize = 11;
+                story_brief.FontStretch = FontStretches.Normal;
                 story_brief.TextAlignment = TextAlignment.Left;
                 story_brief.TextWrapping = TextWrapping.Wrap;
-                                
-                stackpanel.Children.Add(closingButton);
-                stackpanel.Children.Add(story_brief);
+                Grid.SetRow(story_brief, 1);
+                Grid.SetColumn(story_brief, 0);
+
+                // meta-data text elements
+                TextBlock md_text_concept = new TextBlock();
+                md_text_concept.Text = "Concept: " + story.concept;
+                TextBlock md_text_subgenre = new TextBlock();
+                md_text_subgenre.Text = "Subgenre: " + story.subgenre;
+                TextBlock md_text_description = new TextBlock();
+                md_text_description.Text = "Description: A " + story.subgenre + " is a bla bla bla bla bla";
+
+                // meta-data stack panel
+                StackPanel md_panel = new StackPanel();
+                md_panel.Children.Add(md_text_concept);
+                md_panel.Children.Add(md_text_subgenre);
+                md_panel.Children.Add(md_text_description);
+                Grid.SetRow(md_panel, 1);
+                Grid.SetColumn(md_panel, 1);
+
+                // Add the elements to the Grid Children collection
+                story_window_grid.Children.Add(story_title);
+                story_window_grid.Children.Add(closingButton);
+                story_window_grid.Children.Add(story_brief);
+                story_window_grid.Children.Add(md_panel);
+
                 ScatterViewItem item = new ScatterViewItem();
                 item.CanScale = true;
                 
                 item.Style = (Style)Application.Current.FindResource("ScatterViewItemStyle");
-                item.Content = stackpanel;
+                item.Content = story_window_grid;
+                item.Width = 500;
+                item.Height = 300;
                 story_scatter_view.Items.Add(item);
                 //TagKeyword test = (TagKeyword)this.Visualizer.ActiveVisualizations[0];
                
@@ -223,8 +288,8 @@ namespace TouchingStory
             }
             else
             {
-                StackPanel sp = (StackPanel)story_window.Parent;
-                ScatterViewItem svi = (ScatterViewItem)sp.Parent;
+                Grid grid1 = (Grid)story_window.Parent;
+                ScatterViewItem svi = (ScatterViewItem)grid1.Parent;
                 ScatterView sv = (ScatterView)svi.Parent;
                 sv.Opacity = 1;
             }
@@ -234,8 +299,8 @@ namespace TouchingStory
         {
             
             Button test_sender = (Button)sender;
-            StackPanel sp = (StackPanel)test_sender.Parent;
-            ScatterViewItem svi = (ScatterViewItem)sp.Parent;
+            Grid grid1 = (Grid)test_sender.Parent;
+            ScatterViewItem svi = (ScatterViewItem)grid1.Parent;
             ScatterView sv = (ScatterView)svi.Parent;
             sv.Opacity = 0;
             //SurfaceWindow1.mainGridView.Children.Remove(sv); 

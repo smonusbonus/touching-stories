@@ -240,6 +240,7 @@ namespace TouchingStory
             story.Name = ObjectName;
             mainGridView.RegisterName(ObjectName, story);
 
+
             List<Story> story_list = LoadJson();
             
             switch (story.VisualizedTag.Value)
