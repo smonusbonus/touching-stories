@@ -238,9 +238,10 @@ namespace TouchingStory
 
             TagKeyword story = (TagKeyword)e.TagVisualization;
             story.Name = ObjectName;
-            mainGridView.RegisterName(ObjectName, story);
-
-
+            if (mainGridView.FindName(ObjectName) == null)
+            {
+                mainGridView.RegisterName(ObjectName, story);
+            }
             List<Story> story_list = LoadJson();
             
             switch (story.VisualizedTag.Value)
