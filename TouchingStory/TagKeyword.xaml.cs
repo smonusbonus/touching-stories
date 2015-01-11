@@ -178,6 +178,7 @@ namespace TouchingStory
                 ScatterView story_scatter_view = new ScatterView();                
                 StackPanel stackpanel = new StackPanel();
                 stackpanel.Background = Brushes.WhiteSmoke;
+
                 Button closingButton = new Button();
                 closingButton.TouchDown += new EventHandler<TouchEventArgs>(closeStoryWindow);                
                 closingButton.Content = "X";
@@ -185,6 +186,7 @@ namespace TouchingStory
                 closingButton.Margin = new Thickness(0, 5, 5, 0);
                 closingButton.Padding = new Thickness(5, 0, 5, 0);
                 closingButton.HorizontalAlignment = HorizontalAlignment.Right;
+
                 Story story = story_list.Find(x => x.id == story_id);
                 story_brief.Text = story.text;
                 story_brief.Background = Brushes.WhiteSmoke;

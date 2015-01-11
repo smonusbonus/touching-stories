@@ -36,29 +36,20 @@ namespace TouchingStory
         public static TagVisualizer ms;
         public static SurfaceWindow homesurface;
         public static Grid mainGridView;
-        
+        public static Dictionary<String, List<String>> commonStories;
+
         public SurfaceWindow1()
         {
             InitializeComponent();
             InitializeDefinitions();
-
-            // load the json file into Story Class when starting the app
-            //List<Story> story_list = LoadJson();
-
-            // filter json based on keyword
-            //listOfIds = FilterJson(story_list, "dood");
             
-            
-            // print ids of corresponding keyword
-            /*foreach(int id in listOfIds) {
-                System.Diagnostics.Debug.WriteLine(id);
-            }*/
             ms = MyTagVisualizer;
             homesurface = HomeSurface;
             mainGridView = MainGridView;
-            
+
+            commonStories = new Dictionary<String,List<String>>();
+       
             // Testing: this is a test to display one element of the json file 
-            
             
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();            
@@ -176,12 +167,11 @@ namespace TouchingStory
         }
 
 
-        // this function filters the json data based on a tag-name
+        // this function filters the json data based on a tag-name and a filterBy parameter
+        // which either can be "location" or "character"
         public int[] FilterJsonBy(List<Story> stories, string matchTag, string filterBy)
         {
             List<int> listOfStoryIds = new List<int>();
-
-            System.Diagnostics.Debug.WriteLine("executed");
 
             for (byte i = 0; i < stories.Count; i++)
             {
@@ -193,16 +183,12 @@ namespace TouchingStory
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine(stories[i].character);
                     if (filterBy == "character" && stories[i].character == matchTag)
                     {
-                        System.Diagnostics.Debug.WriteLine(stories[i].id);
                         listOfStoryIds.Add(stories[i].id);
                     }
-                    System.Diagnostics.Debug.WriteLine(stories[i].location);
                     if (filterBy == "location" && stories[i].location == matchTag)
                     {
-                        System.Diagnostics.Debug.WriteLine(stories[i].id);
                         listOfStoryIds.Add(stories[i].id);
                     }
                 }
@@ -234,6 +220,7 @@ namespace TouchingStory
             MyTagVisualizer.Definitions.Add(tagDef);
         }
         
+        // here the tagged object definitions are executed
         private void InitializeDefinitions()
         {
             for (int i = 0; i < 15; i++)
@@ -308,10 +295,8 @@ namespace TouchingStory
         
         private void OnVisualizationRemoved(object sender, TagVisualizerEventArgs e)
         {
-            TagVisualizer tagvisualizer = (TagVisualizer)e.Source;
-            
-            TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;
-            
+            TagVisualizer tagvisualizer = (TagVisualizer)e.Source;            
+            TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;            
         }
 
         private void OnVisualizationMoved(object sender, TagVisualizerEventArgs e)
@@ -320,5 +305,36 @@ namespace TouchingStory
 
         }
 
+        public static void addTagID_commonStories(string cellID, string TagID)
+        {
+
+            if (commonStories.ContainsKey(cellID) == false)
+            {
+                List<String> tagIDs = new List<String> { TagID };
+                commonStories.Add(cellID, tagIDs);
+            }
+            else
+            {
+                if (commonStories[cellID].Contains(TagID) == false)
+                  commonStories[cellID].Add(TagID);
+            }
+        }
+
+        public static void removeTagID_commonStories(string cellID, string TagID)
+        {
+
+            if (commonStories.ContainsKey(cellID) == true)
+            {
+                commonStories[cellID].Remove(TagID);
+            }
+        }
+
+        public static Boolean commonStories_containKeyValue(String cellID, String TagID)
+        {
+            if (commonStories.ContainsKey(cellID) == true)            
+                return commonStories[cellID].Contains(TagID);            
+            else
+                return false;
+        }
     }
 }
