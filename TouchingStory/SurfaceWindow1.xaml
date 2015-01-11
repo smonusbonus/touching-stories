@@ -14,8 +14,16 @@
             Background="White" 
             Height="Auto" Width="Auto"
             VisualizationAdded="OnVisualizationAdded"           
-            VisualizationMoved="OnVisualizationMoved" 
+            VisualizationMoved="OnVisualizationMoved"             
             >
         </s:TagVisualizer>
+        <TextBlock
+            Name="StartingMessage"
+            Text="Put a fairy object on the table"
+            Foreground="Black"
+            FontSize="30"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontFamily="Times New Roman"></TextBlock>
     </Grid>
 </s:SurfaceWindow>

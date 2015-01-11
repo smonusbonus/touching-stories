@@ -48,7 +48,7 @@ namespace TouchingStory
             mainGridView = MainGridView;
 
             commonStories = new Dictionary<String,List<String>>();
-       
+   
             // Testing: this is a test to display one element of the json file 
             
             // Add handlers for window availability events
@@ -232,15 +232,22 @@ namespace TouchingStory
         private void OnVisualizationAdded(object sender, TagVisualizerEventArgs e)
         {
             // Find value object and convert to string to use as name
+            if (StartingMessage.IsVisible == true)
+            {
+                
+                StartingMessage.Visibility = Visibility.Hidden;
+            }
+            
             var PlacedTag = e.TagVisualization.VisualizedTag;
             var ObjectName = "tag_" + PlacedTag.Value.ToString();
             // Register name of object for later use with registername(name, object)
 
             TagKeyword story = (TagKeyword)e.TagVisualization;
             story.Name = ObjectName;
-            mainGridView.RegisterName(ObjectName, story);
-
-
+            if (mainGridView.FindName(ObjectName) == null)
+            {
+                mainGridView.RegisterName(ObjectName, story);
+            }
             List<Story> story_list = LoadJson();
             
             switch (story.VisualizedTag.Value)
