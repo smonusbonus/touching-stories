@@ -236,6 +236,9 @@ namespace TouchingStory
 
         public static void DrawConnections()
         {
+
+            var list = SurfaceWindow1.commonStories;
+
             // To do: Get list with lines to draw
 
             // Delete all lines within the grid
@@ -246,20 +249,24 @@ namespace TouchingStory
 
             // code for debugging
             test = test + 1;
-            if (test == 2)
+            if (test == 3)
             {
                 var justsomething = "justaline";
+
+
+                // To do: Draw the new lines
+
+                // To do: Get position textblock with certain id from a certain tag
+
+                TagVisualization TagVis = (TagVisualization)SurfaceWindow1.mainGridView.FindName("tag_1");
+
+                //var TextboxWithStory = (TextBox)TagVisualization.FindName("Field_CompanyName");
+
+
+                // Testline draw line from tag 0 to story with id .. in tag 2
+                var conLine = new Line();
+
             }
-            // To do: Draw the new lines
-
-            // Testline draw line from tag 0 to story with id .. in tag 2
-            var conLine = new Line();
-
-            // To do: Get position textblock with certain id from a certain tag
-
-            TagVisualization TagVis = (TagVisualization)SurfaceWindow1.mainGridView.FindName("tag_1");
-
-            //var TextboxWithStory = (TextBox)this.FindName("Field_CompanyName");
 
             //GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
             //Point position = gt.Transform(new Point(0d, 0d));
