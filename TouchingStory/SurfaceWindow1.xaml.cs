@@ -42,18 +42,7 @@ namespace TouchingStory
         {
             InitializeComponent();
             InitializeDefinitions();
-
-            // load the json file into Story Class when starting the app
-            //List<Story> story_list = LoadJson();
-
-            // filter json based on keyword
-            //listOfIds = FilterJson(story_list, "dood");
             
-            
-            // print ids of corresponding keyword
-            /*foreach(int id in listOfIds) {
-                System.Diagnostics.Debug.WriteLine(id);
-            }*/
             ms = MyTagVisualizer;
             homesurface = HomeSurface;
             mainGridView = MainGridView;
@@ -61,7 +50,6 @@ namespace TouchingStory
             commonStories = new Dictionary<String,List<String>>();
        
             // Testing: this is a test to display one element of the json file 
-            
             
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();            
@@ -177,76 +165,68 @@ namespace TouchingStory
 
             return idList.ToArray();
         }
+
+
+        // this function filters the json data based on a tag-name and a filterBy parameter
+        // which either can be "location" or "character"
+        public int[] FilterJsonBy(List<Story> stories, string matchTag, string filterBy)
+        {
+            List<int> listOfStoryIds = new List<int>();
+
+            for (byte i = 0; i < stories.Count; i++)
+            {
+                //System.Diagnostics.Debug.WriteLine(stories[i].id);
+                // make sure there's not more than 10 stories per tag, otherwise it gets too crowded on the screen
+                if (listOfStoryIds.Count() > 10)
+                {
+                    break;
+                }
+                else
+                {
+                    if (filterBy == "character" && stories[i].character == matchTag)
+                    {
+                        listOfStoryIds.Add(stories[i].id);
+                    }
+                    if (filterBy == "location" && stories[i].location == matchTag)
+                    {
+                        listOfStoryIds.Add(stories[i].id);
+                    }
+                }
+            }
+
+            System.Diagnostics.Debug.WriteLine(listOfStoryIds);
+            return listOfStoryIds.ToArray();
+        }
+
+        private void InitNewTag(int value) {
+            TagVisualizationDefinition tagDef = new TagVisualizationDefinition();
+            // The tag value that this definition will respond to.
+            tagDef.Value = value;
+            // The .xaml file for the UI
+            tagDef.Source = new Uri("TagKeyword.xaml", UriKind.Relative);
+            // The maximum number for this tag value.
+            tagDef.MaxCount = 2;
+            // The visualization stays for 2 seconds.
+            tagDef.LostTagTimeout = 2000.0;
+            // Orientation offset (default).
+            tagDef.OrientationOffsetFromTag = 0.0;
+            // Physical offset (horizontal inches, vertical inches).
+            tagDef.PhysicalCenterOffsetFromTag = new Vector(0.0, 0.0);
+            // Tag removal behavior (default).
+            tagDef.TagRemovedBehavior = TagRemovedBehavior.Fade;
+            // Orient UI to tag? (default).
+            tagDef.UsesTagOrientation = true;
+            // Add the definition to the collection.
+            MyTagVisualizer.Definitions.Add(tagDef);
+        }
         
+        // here the tagged object definitions are executed
         private void InitializeDefinitions()
         {
-            for (byte k = 1; k <= 5; k++)
+            for (int i = 0; i < 15; i++)
             {
-                TagVisualizationDefinition tagDef =
-                    new TagVisualizationDefinition();
-                // The tag value that this definition will respond to.
-                tagDef.Value = k;
-                // The .xaml file for the UI
-                tagDef.Source =
-                    new Uri("TagKeyword.xaml", UriKind.Relative);
-                // The maximum number for this tag value.
-                tagDef.MaxCount = 2;
-                // The visualization stays for 2 seconds.
-                tagDef.LostTagTimeout = 2000.0;
-                // Orientation offset (default).
-                tagDef.OrientationOffsetFromTag = 0.0;
-                // Physical offset (horizontal inches, vertical inches).
-                tagDef.PhysicalCenterOffsetFromTag = new Vector(0.0, 0.0);
-                // Tag removal behavior (default).
-                tagDef.TagRemovedBehavior = TagRemovedBehavior.Fade;
-                // Orient UI to tag? (default).
-                tagDef.UsesTagOrientation = true;
-                // Add the definition to the collection.
-                MyTagVisualizer.Definitions.Add(tagDef);
+                InitNewTag(i);
             }
-            TagVisualizationDefinition tagDef0 =
-                    new TagVisualizationDefinition();
-            // The tag value that this definition will respond to.
-            tagDef0.Value = 0xC1;
-            // The .xaml file for the UI
-            tagDef0.Source =
-                new Uri("TagKeyword.xaml", UriKind.Relative);
-            // The maximum number for this tag value.
-            tagDef0.MaxCount = 2;
-            // The visualization stays for 2 seconds.
-            tagDef0.LostTagTimeout = 2000.0;
-            // Orientation offset (default).
-            tagDef0.OrientationOffsetFromTag = 0.0;
-            // Physical offset (horizontal inches, vertical inches).
-            tagDef0.PhysicalCenterOffsetFromTag = new Vector(0.0, 0.0);
-            // Tag removal behavior (default).
-            tagDef0.TagRemovedBehavior = TagRemovedBehavior.Fade;
-            // Orient UI to tag? (default).
-            tagDef0.UsesTagOrientation = true;
-            // Add the definition to the collection.
-            MyTagVisualizer.Definitions.Add(tagDef0);
-
-            TagVisualizationDefinition tagDef1 =
-                    new TagVisualizationDefinition();
-            // The tag value that this definition will respond to.
-            tagDef1.Value = 0xC0;
-            // The .xaml file for the UI
-            tagDef1.Source =
-                new Uri("TagKeyword.xaml", UriKind.Relative);
-            // The maximum number for this tag value.
-            tagDef1.MaxCount = 2;
-            // The visualization stays for 2 seconds.
-            tagDef1.LostTagTimeout = 2000.0;
-            // Orientation offset (default).
-            tagDef1.OrientationOffsetFromTag = 0.0;
-            // Physical offset (horizontal inches, vertical inches).
-            tagDef1.PhysicalCenterOffsetFromTag = new Vector(0.0, 0.0);
-            // Tag removal behavior (default).
-            tagDef1.TagRemovedBehavior = TagRemovedBehavior.Fade;
-            // Orient UI to tag? (default).
-            tagDef1.UsesTagOrientation = true;
-            // Add the definition to the collection.
-            MyTagVisualizer.Definitions.Add(tagDef1);
         }
 
         private void OnVisualizationAdded(object sender, TagVisualizerEventArgs e)
@@ -255,15 +235,52 @@ namespace TouchingStory
             TagKeyword story = (TagKeyword)e.TagVisualization;
             switch (story.VisualizedTag.Value)
             {
-                case 0xC0:
-                    listOfIds = FilterJson(story_list, "dood");
+                case 0:
+                    //listOfIds = FilterJson(story_list, "dood");
+                    listOfIds = FilterJsonBy(story_list, "heks", "character");
                     break;
-                case 0xC1:
-                    listOfIds = FilterJson(story_list, "hekserij");
+                case 1:
+                    //listOfIds = FilterJson(story_list, "hekserij");
+                    listOfIds = FilterJsonBy(story_list, "duivel", "character");
+                    break;
+                case 2:
+                    listOfIds = FilterJsonBy(story_list, "boer", "character");
                     break;
                 case 3:
+                    listOfIds = FilterJsonBy(story_list, "soldaat", "character");
                     break;
                 case 4:
+                    listOfIds = FilterJsonBy(story_list, "kind", "character");
+                    break;
+                case 5:
+                    listOfIds = FilterJsonBy(story_list, "spook", "character");
+                    break;
+                case 6:
+                    listOfIds = FilterJsonBy(story_list, "kat", "character");
+                    break;
+                case 7:
+                    listOfIds = FilterJsonBy(story_list, "dorp", "location");
+                    break;
+                case 8:
+                    listOfIds = FilterJsonBy(story_list, "kerk", "location");
+                    break;
+                case 9:
+                    listOfIds = FilterJsonBy(story_list, "kasteel", "location");
+                    break;
+                case 10:
+                    listOfIds = FilterJsonBy(story_list, "bos", "location");
+                    break;
+                case 11:
+                    listOfIds = FilterJsonBy(story_list, "boerderij", "location");
+                    break;
+                case 12:
+                    listOfIds = FilterJsonBy(story_list, "schip", "location");
+                    break;
+                case 13:
+                    listOfIds = FilterJsonBy(story_list, "herberg", "location");
+                    break;
+                case 14:
+                    listOfIds = FilterJsonBy(story_list, "kerkhof", "location");
                     break;
                 default:
                     break;
@@ -279,8 +296,7 @@ namespace TouchingStory
         private void OnVisualizationMoved(object sender, TagVisualizerEventArgs e)
         {
             TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;
-            string text = "success";
-            int a = 0;
+
         }
 
         public static void addTagID_commonStories(string cellID, string TagID)
