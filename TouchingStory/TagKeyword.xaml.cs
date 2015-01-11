@@ -33,6 +33,7 @@ namespace TouchingStory
             
         }
 
+
         // helper function to get all children of an element (used for finding all lines)
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
@@ -105,6 +106,12 @@ namespace TouchingStory
                     if (cell != null)
                     {
                         story_existed = true;
+                        if (SurfaceWindow1.commonStories.ContainsKey(story_brief.Name) == false)
+                        {
+                            SurfaceWindow1.addTagID_commonStories(story_brief.Name, tk.Name);
+                        }
+                        SurfaceWindow1.addTagID_commonStories(story_brief.Name, this.Name);
+                        //Dictionary<String, List<String>> aaa = SurfaceWindow1.commonStories;
                         break;
                     }
                     
@@ -133,7 +140,7 @@ namespace TouchingStory
                     TranslateTransform tt = new TranslateTransform(x, y);
                     story_brief.RenderTransformOrigin = new Point(0.0, 0.0);
                     story_brief.RenderTransform = tt;
-                    
+
                     // Add a Line Element from tagcenter to textbox
                     var myLine = new Line();
                     myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
@@ -155,6 +162,7 @@ namespace TouchingStory
                 }
                 else
                 {
+
                     cell.Background = Brushes.LightYellow;
                 }
             }
@@ -231,7 +239,6 @@ namespace TouchingStory
             ScatterView sv = (ScatterView)svi.Parent;
             sv.Opacity = 0;
             //SurfaceWindow1.mainGridView.Children.Remove(sv); 
-            int a = 0;
         }
 
         public static void DrawConnections()
