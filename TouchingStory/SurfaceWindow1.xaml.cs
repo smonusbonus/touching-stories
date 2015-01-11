@@ -36,7 +36,8 @@ namespace TouchingStory
         public static TagVisualizer ms;
         public static SurfaceWindow homesurface;
         public static Grid mainGridView;
-        
+        public static Dictionary<String, List<String>> commonStories;
+
         public SurfaceWindow1()
         {
             InitializeComponent();
@@ -56,7 +57,9 @@ namespace TouchingStory
             ms = MyTagVisualizer;
             homesurface = HomeSurface;
             mainGridView = MainGridView;
-            
+
+            commonStories = new Dictionary<String,List<String>>();
+       
             // Testing: this is a test to display one element of the json file 
             
             
@@ -269,10 +272,8 @@ namespace TouchingStory
         
         private void OnVisualizationRemoved(object sender, TagVisualizerEventArgs e)
         {
-            TagVisualizer tagvisualizer = (TagVisualizer)e.Source;
-            
-            TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;
-            
+            TagVisualizer tagvisualizer = (TagVisualizer)e.Source;            
+            TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;            
         }
 
         private void OnVisualizationMoved(object sender, TagVisualizerEventArgs e)
@@ -282,5 +283,36 @@ namespace TouchingStory
             int a = 0;
         }
 
+        public static void addTagID_commonStories(string cellID, string TagID)
+        {
+
+            if (commonStories.ContainsKey(cellID) == false)
+            {
+                List<String> tagIDs = new List<String> { TagID };
+                commonStories.Add(cellID, tagIDs);
+            }
+            else
+            {
+                if (commonStories[cellID].Contains(TagID) == false)
+                  commonStories[cellID].Add(TagID);
+            }
+        }
+
+        public static void removeTagID_commonStories(string cellID, string TagID)
+        {
+
+            if (commonStories.ContainsKey(cellID) == true)
+            {
+                commonStories[cellID].Remove(TagID);
+            }
+        }
+
+        public static Boolean commonStories_containKeyValue(String cellID, String TagID)
+        {
+            if (commonStories.ContainsKey(cellID) == true)            
+                return commonStories[cellID].Contains(TagID);            
+            else
+                return false;
+        }
     }
 }
