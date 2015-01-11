@@ -308,57 +308,59 @@ namespace TouchingStory
 
         public static void DrawConnections()
         {
-
-            var list = SurfaceWindow1.commonStories;
-
-            // To do: Get list with lines to draw
-
             // Delete all lines within the grid
             foreach (Line ln in FindVisualChildren<Line>(SurfaceWindow1.mainGridView))
             {
                 SurfaceWindow1.mainGridView.Children.Remove(ln);
             }
 
-            // code for debugging
-            test = test + 1;
-            if (test == 2)
+            // To do: Get list with storyids for which lines to draw
+            var connection_list = SurfaceWindow1.commonStories.Keys;
+
+            // Loop over all connections in list
+            foreach (var storyid in connection_list)
             {
+                // get tags to which to draw connection lines
+                var commontags = SurfaceWindow1.commonStories[storyid];
 
-                // To do: Draw the new lines
-                var list1 = SurfaceWindow1.commonStories;
+                if (commontags.Count > 0)
+                {
+                    // Get tagvisualization tag that contains textblock
+                    TagKeyword TagVisOriginal = (TagKeyword)SurfaceWindow1.mainGridView.FindName(commontags[0]);
+                    // Get position textblock
+                    TextBlock textblock = (TextBlock)TagVisOriginal.VisualizedCells.FindName(storyid);
+                    Point positionBlock = textblock.PointToScreen(new Point(0d, 0d));
 
-                // To do: Get position textblock with certain id from a certain tag
+                    // counter because you do not want to draw line to the first tag (this one contains the textblock)
+                    var tagcounter = 0;
 
-                TagKeyword TagVis9 = (TagKeyword)SurfaceWindow1.mainGridView.FindName("tag_9");
+                    foreach (var tag in commontags)
+                    {
+                        // Not for the first tag because this contains the textblock
+                        if (tagcounter >= 1)
+                        {
+                            // Get position tag
+                            TagKeyword TagVis = (TagKeyword)SurfaceWindow1.mainGridView.FindName(tag);
+                            Point positionTag = TagVis.VisualizedCells.PointToScreen(new Point(0d, 0d));
 
-                TagKeyword TagVis0 = (TagKeyword)SurfaceWindow1.mainGridView.FindName("tag_0");
-
-                TextBlock textblock = (TextBlock)TagVis0.VisualizedCells.FindName("ID42714");
-
-                //var TextboxWithStory = (TextBox)TagVisualization.FindName("Field_CompanyName");
-
-                // Testline draw line from tag 0 to story with id .. in tag 2
-                var conLine = new Line();
-
-                //GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
-                //Point position = gt.Transform(new Point(0d, 0d));
-
-                Point positionTag = TagVis9.VisualizedCells.PointToScreen(new Point(0d, 0d));
-
-                Point positionBlock = textblock.PointToScreen(new Point(0d, 0d));
-
-                conLine.Stroke = System.Windows.Media.Brushes.Red;
-                conLine.X1 = positionTag.X + 300;
-                conLine.X2 = positionBlock.X;
-                conLine.Y1 = positionTag.Y + 190;
-                conLine.Y2 = positionBlock.Y - 40;
-                conLine.HorizontalAlignment = HorizontalAlignment.Left;
-                conLine.VerticalAlignment = VerticalAlignment.Center;
-                conLine.StrokeThickness = 10;
-
-                SurfaceWindow1.mainGridView.Children.Add(conLine);
-            }
-        }
+                            // Draw a line from storytextblock to tagcenter
+                            var conLine = new Line();
+                            conLine.Stroke = System.Windows.Media.Brushes.Red;
+                            conLine.X1 = positionTag.X;
+                            conLine.X2 = positionBlock.X;
+                            conLine.Y1 = positionTag.Y;
+                            conLine.Y2 = positionBlock.Y;
+                            conLine.HorizontalAlignment = HorizontalAlignment.Left;
+                            conLine.VerticalAlignment = VerticalAlignment.Center;
+                            conLine.StrokeThickness = 10;
+                            SurfaceWindow1.mainGridView.Children.Add(conLine);
+                        }
+          
+                        tagcounter = tagcounter + 1;
+                    }//foreach
+                }//if
+            }//foreach
+        }//drawconnections()
 
     }
 }
