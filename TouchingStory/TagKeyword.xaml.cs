@@ -119,27 +119,40 @@ namespace TouchingStory
                 if (story_existed == false)
                 {
                     story_brief.Text = story.title;                    
-                    story_brief.Background = Brushes.LightBlue;
+                    //story_brief.Background = Brushes.LightBlue;
                     story_brief.Foreground = Brushes.Black;
-                    story_brief.Padding = new Thickness(5, 10, 5, 10);
-                    story_brief.LineHeight = Double.NaN;
+                    //story_brief.LineHeight = Double.NaN;
                     story_brief.FontSize = 12;
-                    story_brief.FontStretch = FontStretches.UltraExpanded;
-                    story_brief.TextAlignment = TextAlignment.Left;
+                    story_brief.TextAlignment = TextAlignment.Center;
                     story_brief.TextWrapping = TextWrapping.Wrap;
-                    story_brief.Width = 100;
-                    story_brief.Height = 100;
+                    story_brief.VerticalAlignment = VerticalAlignment.Center;
+                    story_brief.Width = 80;
+                    story_brief.Margin = new Thickness(5, 0, 5, 0);
                     story_brief.TouchDown += new EventHandler<TouchEventArgs>(cell_TouchDown);
-                    // can be used to position the elements properly, although this is probably some kind of hack
-                    story_brief.Margin = new Thickness(240, -50, 0, 0);
-                    //Rotate the Surface Button so that the highlight on the Glass Button is coming from that same place on all of them.
+                    
+                    // create new border element as parent for textblock
+                    Border story_border = new Border();
+                    story_border.Width = 100;
+                    story_border.Height = 100;
+                    story_border.BorderBrush = Brushes.SlateBlue;
+                    story_border.BorderThickness = new Thickness(5, 5, 5, 5);
+                    story_border.Background = Brushes.AliceBlue;
+                    story_border.CornerRadius = new CornerRadius(180);
+                    story_border.Margin = new Thickness(240, -50, 0, 0);
+                    story_border.VerticalAlignment = VerticalAlignment.Center;
+                    //story_border.TouchDown += new EventHandler<TouchEventArgs>(cell_TouchDown);
+
+                    // add story textblock to border element
+                    story_border.Child = story_brief;
+
+                    // arrange stories in a circle
                     double circleRadius = VisualizedCells.Height / 2;
                     double radians = rotation * Math.PI / 180.0;
                     double x = circleRadius * Math.Cos(radians);
                     double y = circleRadius * Math.Sin(radians) + VisualizedCells.Height / 2;
                     TranslateTransform tt = new TranslateTransform(x, y);
-                    story_brief.RenderTransformOrigin = new Point(0.0, 0.0);
-                    story_brief.RenderTransform = tt;
+                    story_border.RenderTransformOrigin = new Point(0.0, 0.0);
+                    story_border.RenderTransform = tt;
 
                     // Add a Line Element from tagcenter to textbox
                     var myLine = new Line();
@@ -156,13 +169,13 @@ namespace TouchingStory
                     //SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
 
                     VisualizedCells.RegisterName(story_brief.Name, story_brief);
-                    VisualizedCells.Children.Add(story_brief);
+                    VisualizedCells.Children.Add(story_border);
 
                     rotation += segment;
                 }
                 else
                 {
-
+                    // TO DO: change to parent element (border)
                     cell.Background = Brushes.LightYellow;
                 }
             }
@@ -177,6 +190,8 @@ namespace TouchingStory
             TextBlock story_brief = new TextBlock();
             TextBlock story_title = new TextBlock();
             TextBlock textblock = (TextBlock)sender;
+            //Border border_elm = (Border)sender;
+            //TextBlock textblock = FindVisualChildren<TextBlock>(border_elm);
             string id = textblock.Name.TrimStart(new Char[] { 'I', 'D' });
             int story_id = Int32.Parse(id);
             story_brief.Name = textblock.Name + "_window";
@@ -350,6 +365,7 @@ namespace TouchingStory
                             conLine.X2 = positionBlock.X;
                             conLine.Y1 = positionTag.Y;
                             conLine.Y2 = positionBlock.Y;
+                            //conLine.Margin = new Thickness(240, -50, 0, 0);
                             conLine.HorizontalAlignment = HorizontalAlignment.Left;
                             conLine.VerticalAlignment = VerticalAlignment.Center;
                             conLine.StrokeThickness = 10;
