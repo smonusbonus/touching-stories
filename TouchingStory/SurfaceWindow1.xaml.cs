@@ -270,12 +270,14 @@ namespace TouchingStory
         private void OnVisualizationRemoved(object sender, TagVisualizerEventArgs e)
         {
             TagVisualizer tagvisualizer = (TagVisualizer)e.Source;            
-            TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;            
+            TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;
+            TagKeyword.DrawConnections();
         }
 
         private void OnVisualizationMoved(object sender, TagVisualizerEventArgs e)
         {
             TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;
+            TagKeyword.DrawConnections();
 
         }
 
