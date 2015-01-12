@@ -353,18 +353,20 @@ namespace TouchingStory
                         {
                             // Get position tag
                             TagKeyword TagVis = (TagKeyword)SurfaceWindow1.mainGridView.FindName(tag);
-                            Point positionTag = TagVis.VisualizedCells.PointToScreen(new Point(0d, 0d));
+                            TagData aaa = TagVis.VisualizedTag;
+                            Point a = new Point(TagVis.Center.X, TagVis.Center.Y);
+                            //Point positionTag = .PointToScreen(new Point(0d, 0d));
 
                             // Draw a line from storytextblock to tagcenter
                             var conLine = new Line();
                             conLine.Stroke = System.Windows.Media.Brushes.Red;
-                            conLine.X1 = positionTag.X;
+                            conLine.X1 = a.X;
                             conLine.X2 = positionBlock.X;
-                            conLine.Y1 = positionTag.Y;
+                            conLine.Y1 = a.Y;
                             conLine.Y2 = positionBlock.Y;
                             //conLine.Margin = new Thickness(240, -50, 0, 0);
-                            conLine.HorizontalAlignment = HorizontalAlignment.Left;
-                            conLine.VerticalAlignment = VerticalAlignment.Center;
+                            //conLine.HorizontalAlignment = HorizontalAlignment.Left;
+                            //conLine.VerticalAlignment = VerticalAlignment.Center;
                             conLine.StrokeThickness = 10;
                             SurfaceWindow1.mainGridView.Children.Add(conLine);
                         }
