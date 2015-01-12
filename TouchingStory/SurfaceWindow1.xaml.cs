@@ -30,6 +30,7 @@ namespace TouchingStory
         /// <summary>
         /// Default constructor.
         /// </summary>
+        /// 
 
         public static List<Story> stories;
         public static int[] listOfIds; 

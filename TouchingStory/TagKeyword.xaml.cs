@@ -341,7 +341,12 @@ namespace TouchingStory
                     TagKeyword TagVisOriginal = (TagKeyword)SurfaceWindow1.mainGridView.FindName(commontags[0]);
                     // Get position textblock
                     TextBlock textblock = (TextBlock)TagVisOriginal.VisualizedCells.FindName(storyid);
-                    Point positionBlock = textblock.PointToScreen(new Point(0d, 0d));
+                    //Point positionBlock = textblock.PointToScreen(new Point(0d, 0d));
+                    //var transform = SurfaceWindow1.mainGridView.TransformToVisual(textblock);
+                    //Point positionBlock = transform.Transform(new Point(0, 0));
+                    Window rootvisual = Window.GetWindow(textblock);
+
+                    Point positionBlock = textblock.TransformToAncestor(rootvisual).Transform(new Point(0, 0));
 
                     // counter because you do not want to draw line to the first tag (this one contains the textblock)
                     var tagcounter = 0;
