@@ -134,38 +134,6 @@ namespace TouchingStory
             }
         }
 
-        // this function filters the json data based on a tag-name
-        public int[] FilterJson(List<Story> stories, string matchTag) 
-        {
-            //int[] idList;
-            List<int> idList = new List<int>();
-
-            for(byte i = 0; i < stories.Count; i++) 
-            {
-                //System.Diagnostics.Debug.WriteLine("i: " + i + " id: " + stories[i].id + " subgenre: " + stories[i].subgenre);
-                
-                // make sure there's not more than 10 stories per tag, otherwise it gets too crowded on the screen
-                if (idList.Count() > 10)
-                {
-                    break;
-                }
-                else
-                {
-                    foreach (string tag in stories[i].tags)
-                    {
-                        if (tag == matchTag)
-                        {
-                            System.Diagnostics.Debug.WriteLine(stories[i].id);
-                            System.Diagnostics.Debug.WriteLine("matching tag " + tag);
-                            idList.Add(stories[i].id);
-                        }
-                    }
-                }
-            }
-
-            return idList.ToArray();
-        }
-
 
         // this function filters the json data based on a tag-name and a filterBy parameter
         // which either can be "location" or "character"
@@ -229,12 +197,12 @@ namespace TouchingStory
             }
         }
 
+        // once a tagged object is used this function executes 
         private void OnVisualizationAdded(object sender, TagVisualizerEventArgs e)
         {
             // Find value object and convert to string to use as name
             if (StartingMessage.IsVisible == true)
             {
-                
                 StartingMessage.Visibility = Visibility.Hidden;
             }
             
@@ -253,11 +221,9 @@ namespace TouchingStory
             switch (story.VisualizedTag.Value)
             {
                 case 0:
-                    //listOfIds = FilterJson(story_list, "dood");
                     listOfIds = FilterJsonBy(story_list, "heks", "character");
                     break;
                 case 1:
-                    //listOfIds = FilterJson(story_list, "hekserij");
                     listOfIds = FilterJsonBy(story_list, "duivel", "character");
                     break;
                 case 2:
@@ -273,30 +239,27 @@ namespace TouchingStory
                     listOfIds = FilterJsonBy(story_list, "spook", "character");
                     break;
                 case 6:
-                    listOfIds = FilterJsonBy(story_list, "kat", "character");
-                    break;
-                case 7:
                     listOfIds = FilterJsonBy(story_list, "dorp", "location");
                     break;
-                case 8:
+                case 7:
                     listOfIds = FilterJsonBy(story_list, "kerk", "location");
                     break;
-                case 9:
+                case 8:
                     listOfIds = FilterJsonBy(story_list, "kasteel", "location");
                     break;
-                case 10:
+                case 9:
                     listOfIds = FilterJsonBy(story_list, "bos", "location");
                     break;
-                case 11:
+                case 10:
                     listOfIds = FilterJsonBy(story_list, "boerderij", "location");
                     break;
-                case 12:
+                case 11:
                     listOfIds = FilterJsonBy(story_list, "schip", "location");
                     break;
-                case 13:
+                case 12:
                     listOfIds = FilterJsonBy(story_list, "herberg", "location");
                     break;
-                case 14:
+                case 13:
                     listOfIds = FilterJsonBy(story_list, "kerkhof", "location");
                     break;
                 default:
