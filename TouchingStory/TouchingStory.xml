@@ -11,38 +11,89 @@ instructions.
     <ExecutableFile>TouchingStory.exe</ExecutableFile>
     <Arguments>
     </Arguments>
-    <IconImageFile>Resources\icon.png</IconImageFile>
+    <IconImageFile>Resources\touching2.png</IconImageFile>
     <Tags>
-      <!--
-      If your application uses tagged objects, please uncomment this section to register the tags with the Shell. 
-      You can register Tags by using the appropriate instructions below.
-      -->
       <!--
       To register a specific value Tag:
       1. Please uncomment the Tag Element below.
       2. Replace "C0" below with the value of your Tag (in hexadecimal format). Repeat this section (this element and its children) for other Tags
       3. Please remove the Launch element if you do not want to register the tag with Object Routing.
-      -->
-      <!--
-      <Tag Value="0xC0">
+      -->     
+      <Tag Value="0x00">
         <Actions>
           <Launch />
         </Actions>
       </Tag>
-      -->
-      <!--
-      To register all Tags in a series:
-      1. Please uncomment the Tag Element below.
-      2. Replace "0000000000000000" below with the series of your Tag (in hexadecimal format). Repeat this section (this element and its children) for other Tags
-      3. Please remove the Launch element if you do not want to register the tag with Object Routing.
-      -->
-      <!--
-      <Tag Series="0x0000000000000000">
+      <Tag Value="0x01">
         <Actions>
-          <Launch /> 
+          <Launch />
         </Actions>
       </Tag>
-      -->
+      <Tag Value="0x02">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x03">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x04">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x05">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x06">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x07">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x08">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x09">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x0A">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x0B">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x0C">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x0D">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>
+      <Tag Value="0x0E">
+        <Actions>
+          <Launch />
+        </Actions>
+      </Tag>      
     </Tags>
   </Application>
 </ss:ApplicationInfo>
