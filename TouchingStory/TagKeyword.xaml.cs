@@ -128,7 +128,6 @@ namespace TouchingStory
                     story_brief.VerticalAlignment = VerticalAlignment.Center;
                     story_brief.Width = 80;
                     story_brief.Margin = new Thickness(5, 0, 5, 0);
-                    story_brief.TouchDown += new EventHandler<TouchEventArgs>(cell_TouchDown);
                     
                     // create new border element as parent for textblock
                     Border story_border = new Border();
@@ -140,7 +139,7 @@ namespace TouchingStory
                     story_border.CornerRadius = new CornerRadius(180);
                     story_border.Margin = new Thickness(240, -50, 0, 0);
                     story_border.VerticalAlignment = VerticalAlignment.Center;
-                    //story_border.TouchDown += new EventHandler<TouchEventArgs>(cell_TouchDown);
+                    story_border.TouchDown += new EventHandler<TouchEventArgs>(cell_TouchDown);
 
                     // add story textblock to border element
                     story_border.Child = story_brief;
@@ -175,8 +174,9 @@ namespace TouchingStory
                 }
                 else
                 {
-                    // TO DO: change to parent element (border)
-                    cell.Background = Brushes.LightYellow;
+                    Border border_parent = cell.Parent as Border;
+                    border_parent.Background = Brushes.LightYellow;
+                    
                 }
             }
 
@@ -189,9 +189,9 @@ namespace TouchingStory
             
             TextBlock story_brief = new TextBlock();
             TextBlock story_title = new TextBlock();
-            TextBlock textblock = (TextBlock)sender;
-            //Border border_elm = (Border)sender;
-            //TextBlock textblock = FindVisualChildren<TextBlock>(border_elm);
+            Border border_elm = (Border)sender;
+            TextBlock textblock = border_elm.Child as TextBlock;
+
             string id = textblock.Name.TrimStart(new Char[] { 'I', 'D' });
             int story_id = Int32.Parse(id);
             story_brief.Name = textblock.Name + "_window";
@@ -203,8 +203,6 @@ namespace TouchingStory
 
                 // Create the Grid
                 Grid story_window_grid = new Grid();
-                //story_window_grid.Width = Double.NaN;
-                //story_window_grid.Height = 100;
                 story_window_grid.Background = Brushes.WhiteSmoke;
                 story_window_grid.HorizontalAlignment = HorizontalAlignment.Left;
                 story_window_grid.VerticalAlignment = VerticalAlignment.Top;
@@ -215,7 +213,6 @@ namespace TouchingStory
                 ColumnDefinition colDef2 = new ColumnDefinition();
                 colDef1.Width = new GridLength(5, GridUnitType.Star);
                 colDef2.Width = new GridLength(2, GridUnitType.Star);
-                //colDef2.MinWidth = 50;
                 story_window_grid.ColumnDefinitions.Add(colDef1);
                 story_window_grid.ColumnDefinitions.Add(colDef2);
 
@@ -255,7 +252,6 @@ namespace TouchingStory
                 // create story text block
                 story_brief.Text = story.text;
                 story_brief.Foreground = Brushes.Black;
-                //story_brief.MinWidth = 300;
                 SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);                
                 story_brief.Padding = new Thickness(20, 5, 30, 10);
                 story_brief.LineHeight = Double.NaN;
@@ -263,6 +259,7 @@ namespace TouchingStory
                 story_brief.FontStretch = FontStretches.Normal;
                 story_brief.TextAlignment = TextAlignment.Left;
                 story_brief.TextWrapping = TextWrapping.Wrap;
+                story_brief.ClipToBounds = true;
                 Grid.SetRow(story_brief, 1);
                 Grid.SetColumn(story_brief, 0);
 
