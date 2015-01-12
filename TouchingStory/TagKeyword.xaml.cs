@@ -206,7 +206,7 @@ namespace TouchingStory
                 story_window_grid.Background = Brushes.WhiteSmoke;
                 story_window_grid.HorizontalAlignment = HorizontalAlignment.Left;
                 story_window_grid.VerticalAlignment = VerticalAlignment.Top;
-                story_window_grid.ShowGridLines = true;
+                story_window_grid.ShowGridLines = false;
 
                 // Define the Columns
                 ColumnDefinition colDef1 = new ColumnDefinition();
