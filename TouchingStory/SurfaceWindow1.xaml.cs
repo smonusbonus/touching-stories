@@ -290,13 +290,13 @@ namespace TouchingStory
             for (int i =0; i<keys.Count; i++)
             {
                 commonStories[keys[i]].Remove(tagkeyword.Name);
-                /*if (commonStories[keys[i]].Count == 1)
+                if (commonStories[keys[i]].Count == 1)
                 {
                     TagKeyword tagkeyword2 = (TagKeyword)mainGridView.FindName(commonStories[keys[i]][0]);
                     tagkeyword2.TagKeyword_Loaded_Again();
-                }*/
+                }
             }
-            //TagKeyword.DrawConnections();      
+            TagKeyword.DrawConnections();      
         }
 
         private void OnVisualizationMoved(object sender, TagVisualizerEventArgs e)

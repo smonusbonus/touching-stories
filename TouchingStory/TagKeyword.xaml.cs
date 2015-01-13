@@ -83,7 +83,7 @@ namespace TouchingStory
         }
 
 
-        private void TagKeyword_Loaded(object sender, RoutedEventArgs e)
+        public void TagKeyword_Loaded(object sender, RoutedEventArgs e)
         {
 
             //TODO: customize TagKeyword's UI based on this.VisualizedTag here
@@ -114,14 +114,17 @@ namespace TouchingStory
                         story_existed = true;
                         if (SurfaceWindow1.commonStories.ContainsKey(story_brief.Name) == false)
                         {
+                            
                             SurfaceWindow1.addTagID_commonStories(story_brief.Name, tk.Name);
                             SurfaceWindow1.addTagID_commonStories(story_brief.Name, this.Name);
+                            
                         }
                         else
                         {
                             if (SurfaceWindow1.commonStories[story_brief.Name].Contains(this.Name) == false)
                             {
                                 SurfaceWindow1.addTagID_commonStories(story_brief.Name, this.Name);
+                                
                             }
                             //Dictionary<String, List<String>> aaa = SurfaceWindow1.commonStories;
                         }
@@ -180,9 +183,8 @@ namespace TouchingStory
                     myLine.VerticalAlignment = VerticalAlignment.Center;
                     myLine.StrokeThickness = 2;
                     VisualizedCells.Children.Add(myLine);
-
-                    //SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
-
+                    if ((TextBlock)VisualizedCells.FindName(story_brief.Name) != null)
+                        VisualizedCells.UnregisterName(story_brief.Name);
                     VisualizedCells.RegisterName(story_brief.Name, story_brief);
                     VisualizedCells.Children.Add(story_border);
 
@@ -195,7 +197,11 @@ namespace TouchingStory
                     
                 }
             }
-
+            if (this.Name == "tag_9")
+            {
+                Dictionary<String, List<String>> aaa = SurfaceWindow1.commonStories;
+                int a = 0;
+            }
             // draw connection lines
             DrawConnections();
         }
@@ -443,7 +449,7 @@ namespace TouchingStory
             }//foreach
         }//drawconnections()
 
-        /*public void TagKeyword_Loaded_Again()
+        public void TagKeyword_Loaded_Again()
         {
 
             //TODO: customize TagKeyword's UI based on this.VisualizedTag here
@@ -502,20 +508,48 @@ namespace TouchingStory
             double rotation = 0.0;
             string value = this.VisualizedTag.Value.ToString();
 
-            for (byte k = 0; k < storyids.Length; k++)
+            for (byte k = 0; k < storyids.Length; k++)   
             {
                 //MyTagVisualization parent = (TagVisualization)VisualizedCells.Parent;
-                
-                TextBlock story_brief = new TextBlock();
+                TextBlock story_brief = new TextBlock();                
                 Story story = story_list.Find(x => x.id == storyids[k]);
                 story_brief.Name = "ID" + story.id.ToString();
                 Boolean story_existed = false;
-                int count = 0;
+                int count = this.Visualizer.ActiveVisualizations.Count;
                 TextBlock cell = null;
-                if (SurfaceWindow1.commonStories.ContainsKey(story_brief.Name) == false || (SurfaceWindow1.commonStories.ContainsKey(story_brief.Name) == true && SurfaceWindow1.commonStories[story_brief.Name].Count < 2))
+
+                for (int i = 0; i < count; i++)
+                {
+                    TagKeyword tk = (TagKeyword)this.Visualizer.ActiveVisualizations[i];
+                    cell = (TextBlock)tk.FindName(story_brief.Name);
+                    if (tk.Name != this.Name && cell != null)
+                    {
+                        story_existed = true;
+                        if (SurfaceWindow1.commonStories.ContainsKey(story_brief.Name) == false)
+                        {
+                            
+                            SurfaceWindow1.addTagID_commonStories(story_brief.Name, tk.Name);
+                            SurfaceWindow1.addTagID_commonStories(story_brief.Name, this.Name);
+                            
+                        }
+                        else
+                        {
+                            if (SurfaceWindow1.commonStories[story_brief.Name].Contains(this.Name) == false)
+                            {
+                                SurfaceWindow1.addTagID_commonStories(story_brief.Name, this.Name);
+                                Dictionary<String, List<String>> aaa = SurfaceWindow1.commonStories;
+                                int a = 0;
+                            }
+                            //Dictionary<String, List<String>> aaa = SurfaceWindow1.commonStories;
+                        }
+                        break;
+                    }
+                    
+                }
+
+                if (story_existed == false)
                 {
                     story_brief.Text = story.title;
-                    //story_brief.Background = Brushes.LightBlue;
                     story_brief.Foreground = Brushes.Black;
                     //story_brief.LineHeight = Double.NaN;
                     story_brief.FontSize = 12;
@@ -524,13 +558,13 @@ namespace TouchingStory
                     story_brief.VerticalAlignment = VerticalAlignment.Center;
                     story_brief.Width = 80;
                     story_brief.Margin = new Thickness(5, 0, 5, 0);
-
+                    
                     // create new border element as parent for textblock
                     Border story_border = new Border();
                     story_border.Width = 100;
                     story_border.Height = 100;
-                    story_border.BorderBrush = Brushes.SlateBlue;
-                    story_border.BorderThickness = new Thickness(5, 5, 5, 5);
+                    story_border.BorderBrush = Brushes.SteelBlue;
+                    story_border.BorderThickness = new Thickness(3, 3, 3, 3);
                     story_border.Background = Brushes.AliceBlue;
                     story_border.CornerRadius = new CornerRadius(180);
                     story_border.Margin = new Thickness(240, -50, 0, 0);
@@ -546,9 +580,9 @@ namespace TouchingStory
                     double circleRadius = VisualizedCells.Height * 0.25 * (1 + adjustment);
                     //circleRadius = circleRadius * adj;
                     double radians = rotation * Math.PI / 180.0;
-                    double x1 = circleRadius * Math.Cos(radians);
-                    double y1 = circleRadius * Math.Sin(radians) + VisualizedCells.Height / 2; ;
-                    TranslateTransform tt = new TranslateTransform(x1, y1);
+                    double x = circleRadius * Math.Cos(radians);
+                    double y = circleRadius * Math.Sin(radians) + VisualizedCells.Height / 2;;
+                    TranslateTransform tt = new TranslateTransform(x, y);
                     story_border.RenderTransformOrigin = new Point(0.0, 0.0);
                     story_border.RenderTransform = tt;
 
@@ -556,9 +590,9 @@ namespace TouchingStory
                     var myLine = new Line();
                     myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
                     myLine.X1 = 300;
-                    myLine.X2 = x1 + 240 + 50;
+                    myLine.X2 = x + 240 + 50;
                     myLine.Y1 = 300;
-                    myLine.Y2 = y1 - 50 + 50;
+                    myLine.Y2 = y - 50 + 50;
                     myLine.HorizontalAlignment = HorizontalAlignment.Left;
                     myLine.VerticalAlignment = VerticalAlignment.Center;
                     myLine.StrokeThickness = 2;
@@ -572,8 +606,14 @@ namespace TouchingStory
 
                     rotation += segment;
                 }
+                else
+                {
+                    Border border_parent = cell.Parent as Border;
+                    border_parent.Background = Brushes.LightYellow;
+                    
+                }
             }
-
-        }*/
+        
+        }
     }
 }
