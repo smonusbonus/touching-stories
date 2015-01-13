@@ -368,19 +368,20 @@ namespace TouchingStory
                 Grid grid1 = (Grid)story_window.Parent;
                 ScatterViewItem svi = (ScatterViewItem)grid1.Parent;
                 ScatterView sv = (ScatterView)svi.Parent;
+                Canvas.SetZIndex(sv, (int)70);
                 sv.Opacity = 1;
             }
         }
 
         private void closeStoryWindow(object sender, TouchEventArgs e)
         {
-            
             //Button test_sender = (Button)sender;
             Border test_sender = (Border)sender;
             Grid grid1 = (Grid)test_sender.Parent;
             ScatterViewItem svi = (ScatterViewItem)grid1.Parent;
             ScatterView sv = (ScatterView)svi.Parent;
             sv.Opacity = 0;
+            Canvas.SetZIndex(sv, (int)-1);
             //SurfaceWindow1.mainGridView.Children.Remove(sv); 
         }
 
