@@ -37,6 +37,7 @@ namespace TouchingStory
         public static TagVisualizer ms;
         public static SurfaceWindow homesurface;
         public static Grid mainGridView;
+        //public static Canvas mainGridView;
         public static Dictionary<String, List<String>> commonStories;
 
         public SurfaceWindow1()
@@ -192,7 +193,7 @@ namespace TouchingStory
         // here the tagged object definitions are executed
         private void InitializeDefinitions()
         {
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 14; i++)
             {
                 InitNewTag(i);
             }
@@ -206,17 +207,27 @@ namespace TouchingStory
             {
                 StartingMessage.Visibility = Visibility.Hidden;
             }
+
+            TagVisualizer tagvisualizer = (TagVisualizer)e.Source;
+
+            
+            Canvas.SetZIndex(tagvisualizer, (int)50);
             
             var PlacedTag = e.TagVisualization.VisualizedTag;
             var ObjectName = "tag_" + PlacedTag.Value.ToString();
             // Register name of object for later use with registername(name, object)
 
             TagKeyword story = (TagKeyword)e.TagVisualization;
+
             story.Name = ObjectName;
-            if ((TagKeyword)mainGridView.FindName(ObjectName) != null)
+            if ((TagKeyword)mainGridView.FindName(ObjectName) != null) 
+            {
                 mainGridView.UnregisterName(ObjectName);
+            }
             mainGridView.RegisterName(ObjectName, story);
             List<Story> story_list = LoadJson();
+
+            //System.Diagnostics.Debug.WriteLine(Canvas.GetZIndex(story));
             
             switch (story.VisualizedTag.Value)
             {

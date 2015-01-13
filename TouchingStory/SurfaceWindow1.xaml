@@ -6,12 +6,12 @@
     Name="HomeSurface"
     >
    
-    <Grid Name="MainGridView">        
+    <Grid Name="MainGridView"
+            Background="White">        
         <s:TagVisualizer 
             Name="MyTagVisualizer" 
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"
-            Background="White" 
             Height="Auto" Width="Auto"
             VisualizationAdded="OnVisualizationAdded"           
             VisualizationMoved="OnVisualizationMoved" 
