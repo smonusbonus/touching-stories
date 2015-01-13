@@ -55,6 +55,13 @@ namespace TouchingStory
             }
         }
 
+        private Color CreateRgbColor(byte red, byte green, byte blue)
+        {
+            Color myRgbColor = new Color();
+            myRgbColor = Color.FromRgb(red, green, blue);
+            return myRgbColor;
+        }
+
 
         private void OnPreviewVisualizationMoved(object sender, TagVisualizerEventArgs e)
         {
@@ -201,7 +208,10 @@ namespace TouchingStory
 
             if (story_window == null)
             {
-                ScatterView story_scatter_view = new ScatterView();                
+                ScatterView story_scatter_view = new ScatterView();     
+           
+                // variables
+                SolidColorBrush lightgray = new SolidColorBrush(Color.FromRgb(230, 230, 230));
 
                 // Create the Grid
                 Grid story_window_grid = new Grid();
@@ -229,7 +239,7 @@ namespace TouchingStory
 
                 // Define the closing Button
                 Button closingButton = new Button();
-                closingButton.TouchDown += new EventHandler<TouchEventArgs>(closeStoryWindow);                
+                //closingButton.TouchDown += new EventHandler<TouchEventArgs>(closeStoryWindow);                
                 closingButton.Content = "X";
                 closingButton.FontSize = 20;
                 closingButton.Width = 30;
@@ -237,8 +247,16 @@ namespace TouchingStory
                 closingButton.Margin = new Thickness(0, 5, 5, 0);
                 closingButton.Padding = new Thickness(5, 0, 5, 0);
                 closingButton.HorizontalAlignment = HorizontalAlignment.Right;
-                Grid.SetRow(closingButton, 0);
-                Grid.SetColumn(closingButton, 1);
+
+                // create container element for button in order to be able to set background color
+                Border buttonContainer = new Border();
+                buttonContainer.Child = closingButton;
+                buttonContainer.Background = lightgray;
+                buttonContainer.TouchDown += new EventHandler<TouchEventArgs>(closeStoryWindow); 
+
+                // specifiy position in grind for closing button
+                Grid.SetRow(buttonContainer, 0);
+                Grid.SetColumn(buttonContainer, 1);
 
                 // Get story based on id
                 Story story = story_list.Find(x => x.id == story_id);
@@ -268,13 +286,17 @@ namespace TouchingStory
                 // meta-data text elements
                 TextBlock md_text_concept = new TextBlock();
                 md_text_concept.Text = "Concept: " + story.concept;
+                md_text_concept.Padding = new Thickness(10, 20, 10, 5);
                 TextBlock md_text_subgenre = new TextBlock();
                 md_text_subgenre.Text = "Subgenre: " + story.subgenre;
+                md_text_subgenre.Padding = new Thickness(10, 0, 10, 5);
                 TextBlock md_text_description = new TextBlock();
                 md_text_description.Text = "Description: A " + story.subgenre + " is a bla bla bla bla bla";
+                md_text_description.Padding = new Thickness(10, 0, 10, 5);
 
                 // meta-data stack panel
                 StackPanel md_panel = new StackPanel();
+                md_panel.Background = lightgray;
                 md_panel.Children.Add(md_text_concept);
                 md_panel.Children.Add(md_text_subgenre);
                 md_panel.Children.Add(md_text_description);
@@ -283,17 +305,22 @@ namespace TouchingStory
 
                 // Add the elements to the Grid Children collection
                 story_window_grid.Children.Add(story_title);
-                story_window_grid.Children.Add(closingButton);
+                story_window_grid.Children.Add(buttonContainer);
                 story_window_grid.Children.Add(story_brief);
                 story_window_grid.Children.Add(md_panel);
 
                 ScatterViewItem item = new ScatterViewItem();
                 item.CanScale = true;
-                
                 item.Style = (Style)Application.Current.FindResource("ScatterViewItemStyle");
                 item.Content = story_window_grid;
+                item.BorderThickness = new Thickness(2, 2, 2, 2);
+                item.BorderBrush = new SolidColorBrush(Color.FromRgb(200, 200, 200));
                 item.Width = 500;
-                item.Height = 350;
+                item.MinWidth = 400;
+                item.MaxWidth = 700;
+                item.Height = 300;
+                item.MinHeight = 250;
+                item.MaxHeight = 500;
                 story_scatter_view.Items.Add(item);
 
                 Canvas.SetZIndex(story_scatter_view, (int)70);
@@ -313,7 +340,8 @@ namespace TouchingStory
         private void closeStoryWindow(object sender, TouchEventArgs e)
         {
             
-            Button test_sender = (Button)sender;
+            //Button test_sender = (Button)sender;
+            Border test_sender = (Border)sender;
             Grid grid1 = (Grid)test_sender.Parent;
             ScatterViewItem svi = (ScatterViewItem)grid1.Parent;
             ScatterView sv = (ScatterView)svi.Parent;
