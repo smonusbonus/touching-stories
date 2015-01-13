@@ -298,7 +298,28 @@ namespace TouchingStory
                 md_text_subgenre.Text = "Subgenre: " + story.subgenre;
                 md_text_subgenre.Padding = new Thickness(10, 0, 10, 5);
                 TextBlock md_text_description = new TextBlock();
-                md_text_description.Text = "Description: A " + story.subgenre + " is a bla bla bla bla bla";
+
+                var sage_text = "Een sage is een traditioneel volksverhaal dat zich afspeelt op een bekende plaats en op een bekend moment in de tijd en vaak gegroeid is om een historische kern.";
+                var sprookje_text = "Een sprookje is in oorsprong een mondeling overgeleverd volksverhaal dat gebruikmaakt van magie en fantasie. Het begint vaak met de woorden \"Er was eens...\" en speelt zich typisch af op een onbepaalde plaats in een onbepaald verleden.";
+                var legende_text = "Een legende is oorspronkelijk een alternatieve levensbeschrijving van een heilige met toegevoegde fictieve elementen, waarin aan de betreffende persoon allerlei wonderen toegedicht worden.";
+                var desc_text = "";
+
+                switch (story.subgenre)
+                {
+                    case "sage":
+                        desc_text = sage_text;
+                        break;
+                    case "sprookje":
+                        desc_text = sprookje_text;
+                        break;
+                    case "legende":
+                        desc_text = legende_text;
+                        break;
+                    default:
+                        break;
+                }
+
+                md_text_description.Text = "Beschrijving: " + desc_text;
                 md_text_description.Padding = new Thickness(10, 0, 10, 5);
 
                 // meta-data stack panel
