@@ -138,7 +138,7 @@ namespace TouchingStory
 
         // this function filters the json data based on a tag-name and a filterBy parameter
         // which either can be "location" or "character"
-        public int[] FilterJsonBy(List<Story> stories, string matchTag, string filterBy)
+        public static int[] FilterJsonBy(List<Story> stories, string matchTag, string filterBy)
         {
             List<int> listOfStoryIds = new List<int>();
 
@@ -271,7 +271,21 @@ namespace TouchingStory
         {
             TagVisualizer tagvisualizer = (TagVisualizer)e.Source;            
             TagKeyword tagkeyword = (TagKeyword)e.TagVisualization;
-            TagKeyword.DrawConnections();      
+            List<String> keys = new List<String>();
+            foreach (string value in commonStories.Keys)
+            {
+                keys.Add(value);
+            }
+            for (int i =0; i<keys.Count; i++)
+            {
+                commonStories[keys[i]].Remove(tagkeyword.Name);
+                /*if (commonStories[keys[i]].Count == 1)
+                {
+                    TagKeyword tagkeyword2 = (TagKeyword)mainGridView.FindName(commonStories[keys[i]][0]);
+                    tagkeyword2.TagKeyword_Loaded_Again();
+                }*/
+            }
+            //TagKeyword.DrawConnections();      
         }
 
         private void OnVisualizationMoved(object sender, TagVisualizerEventArgs e)
