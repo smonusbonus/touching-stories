@@ -145,10 +145,13 @@ namespace TouchingStory
                     story_border.Child = story_brief;
 
                     // arrange stories in a circle
-                    double circleRadius = VisualizedCells.Height / 2;
+                    // circleradius responsive to nr of stories
+                    double adjustment = storyids.Length * 0.05;
+                    double circleRadius = VisualizedCells.Height * 0.25 * (1 + adjustment);
+                    //circleRadius = circleRadius * adj;
                     double radians = rotation * Math.PI / 180.0;
                     double x = circleRadius * Math.Cos(radians);
-                    double y = circleRadius * Math.Sin(radians) + VisualizedCells.Height / 2;
+                    double y = circleRadius * Math.Sin(radians) + VisualizedCells.Height / 2;;
                     TranslateTransform tt = new TranslateTransform(x, y);
                     story_border.RenderTransformOrigin = new Point(0.0, 0.0);
                     story_border.RenderTransform = tt;
