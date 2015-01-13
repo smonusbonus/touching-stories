@@ -295,6 +295,8 @@ namespace TouchingStory
                 item.Width = 500;
                 item.Height = 350;
                 story_scatter_view.Items.Add(item);
+
+                Canvas.SetZIndex(story_scatter_view, (int)70);
                
                 SurfaceWindow1.mainGridView.Children.Add(story_scatter_view);
                
