@@ -20,7 +20,7 @@
         </s:TagVisualizer>
         <TextBlock
             Name="StartingMessage"
-            Text="Please put an object on the table"
+            Text="Plaats een object op de tafel"
             Foreground="Black"
             FontSize="30"
             HorizontalAlignment="Center"
