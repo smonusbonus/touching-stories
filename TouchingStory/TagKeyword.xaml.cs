@@ -33,7 +33,6 @@ namespace TouchingStory
             
         }
 
-
         // helper function to get all children of an element (used for finding all lines)
         public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {
@@ -64,18 +63,17 @@ namespace TouchingStory
             GeneralTransform gt = VisualizedCells.TransformToVisual(SurfaceWindow1.mainGridView);
             Point position = gt.Transform(new Point(0d, 0d));
             //Point position = VisualizedCells.PointToScreen(new Point(0d, 0d));
-            conLine.Stroke = System.Windows.Media.Brushes.Red;
+            conLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
             conLine.X1 = position.X + 305;
             conLine.X2 = position.X + 355;
             conLine.Y1 = position.Y - 105;
             conLine.Y2 = position.Y - 105;
             conLine.HorizontalAlignment = HorizontalAlignment.Left;
             conLine.VerticalAlignment = VerticalAlignment.Center;
-            conLine.StrokeThickness = 10;
+            conLine.StrokeThickness = 2;
 
-            SurfaceWindow1.mainGridView.Children.Add(conLine);  
+            SurfaceWindow1.mainGridView.Children.Add(conLine);
         }
-
 
 
         private void TagKeyword_Loaded(object sender, RoutedEventArgs e)
@@ -99,6 +97,7 @@ namespace TouchingStory
                 Boolean story_existed = false;
                 int count = this.Visualizer.ActiveVisualizations.Count;
                 TextBlock cell = null;
+
                 for (int i = 0; i < count; i++)
                 {
                     TagKeyword tk = (TagKeyword)this.Visualizer.ActiveVisualizations[i];
@@ -116,10 +115,10 @@ namespace TouchingStory
                     }
                     
                 }
+
                 if (story_existed == false)
                 {
-                    story_brief.Text = story.title;                    
-                    //story_brief.Background = Brushes.LightBlue;
+                    story_brief.Text = story.title;
                     story_brief.Foreground = Brushes.Black;
                     //story_brief.LineHeight = Double.NaN;
                     story_brief.FontSize = 12;
@@ -133,8 +132,8 @@ namespace TouchingStory
                     Border story_border = new Border();
                     story_border.Width = 100;
                     story_border.Height = 100;
-                    story_border.BorderBrush = Brushes.SlateBlue;
-                    story_border.BorderThickness = new Thickness(5, 5, 5, 5);
+                    story_border.BorderBrush = Brushes.SteelBlue;
+                    story_border.BorderThickness = new Thickness(3, 3, 3, 3);
                     story_border.Background = Brushes.AliceBlue;
                     story_border.CornerRadius = new CornerRadius(180);
                     story_border.Margin = new Thickness(240, -50, 0, 0);
@@ -165,7 +164,7 @@ namespace TouchingStory
                     myLine.Y2 = y - 50 + 50;
                     myLine.HorizontalAlignment = HorizontalAlignment.Left;
                     myLine.VerticalAlignment = VerticalAlignment.Center;
-                    myLine.StrokeThickness = 10;
+                    myLine.StrokeThickness = 2;
                     VisualizedCells.Children.Add(myLine);
 
                     //SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
@@ -294,9 +293,8 @@ namespace TouchingStory
                 item.Style = (Style)Application.Current.FindResource("ScatterViewItemStyle");
                 item.Content = story_window_grid;
                 item.Width = 500;
-                item.Height = 300;
+                item.Height = 350;
                 story_scatter_view.Items.Add(item);
-                //TagKeyword test = (TagKeyword)this.Visualizer.ActiveVisualizations[0];
                
                 SurfaceWindow1.mainGridView.Children.Add(story_scatter_view);
                
@@ -367,15 +365,13 @@ namespace TouchingStory
 
                             // Draw a line from storytextblock to tagcenter
                             var conLine = new Line();
-                            conLine.Stroke = System.Windows.Media.Brushes.Red;
+                            conLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
                             conLine.X1 = a.X;
                             conLine.X2 = positionBlock.X;
                             conLine.Y1 = a.Y;
                             conLine.Y2 = positionBlock.Y;
-                            //conLine.Margin = new Thickness(240, -50, 0, 0);
-                            //conLine.HorizontalAlignment = HorizontalAlignment.Left;
-                            //conLine.VerticalAlignment = VerticalAlignment.Center;
-                            conLine.StrokeThickness = 10;
+                            conLine.StrokeThickness = 2;
+                            
                             SurfaceWindow1.mainGridView.Children.Add(conLine);
                         }
           
