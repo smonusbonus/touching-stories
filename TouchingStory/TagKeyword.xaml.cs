@@ -115,9 +115,16 @@ namespace TouchingStory
                         if (SurfaceWindow1.commonStories.ContainsKey(story_brief.Name) == false)
                         {
                             SurfaceWindow1.addTagID_commonStories(story_brief.Name, tk.Name);
+                            SurfaceWindow1.addTagID_commonStories(story_brief.Name, this.Name);
                         }
-                        SurfaceWindow1.addTagID_commonStories(story_brief.Name, this.Name);
-                        //Dictionary<String, List<String>> aaa = SurfaceWindow1.commonStories;
+                        else
+                        {
+                            if (SurfaceWindow1.commonStories[story_brief.Name].Contains(this.Name) == false)
+                            {
+                                SurfaceWindow1.addTagID_commonStories(story_brief.Name, this.Name);
+                            }
+                            //Dictionary<String, List<String>> aaa = SurfaceWindow1.commonStories;
+                        }
                         break;
                     }
                     
@@ -366,10 +373,16 @@ namespace TouchingStory
                 // get tags to which to draw connection lines
                 var commontags = SurfaceWindow1.commonStories[storyid];
 
-                if (commontags.Count > 0)
+                if (commontags.Count > 1)
                 {
                     // Get tagvisualization tag that contains textblock
-                    TagKeyword TagVisOriginal = (TagKeyword)SurfaceWindow1.mainGridView.FindName(commontags[0]);
+                    TagKeyword TagVisOriginal = new TagKeyword();
+                    for (int i = 0; i < commontags.Count; i++)
+                    { 
+                        TagVisOriginal = (TagKeyword)SurfaceWindow1.mainGridView.FindName(commontags[0]);
+                        if (TagVisOriginal != null)
+                            break;
+                    }
                     // Get position textblock
                     TextBlock textblock = (TextBlock)TagVisOriginal.VisualizedCells.FindName(storyid);
                     //Point positionBlock = textblock.PointToScreen(new Point(0d, 0d));
@@ -380,12 +393,11 @@ namespace TouchingStory
                     Point positionBlock = textblock.TransformToAncestor(rootvisual).Transform(new Point(0, 0));
 
                     // counter because you do not want to draw line to the first tag (this one contains the textblock)
-                    var tagcounter = 0;
-
+                    
                     foreach (var tag in commontags)
                     {
                         // Not for the first tag because this contains the textblock
-                        if (tagcounter >= 1)
+                        if (tag != TagVisOriginal.Name)
                         {
                             // Get position tag
                             TagKeyword TagVis = (TagKeyword)SurfaceWindow1.mainGridView.FindName(tag);
@@ -401,15 +413,145 @@ namespace TouchingStory
                             conLine.Y1 = a.Y;
                             conLine.Y2 = positionBlock.Y;
                             conLine.StrokeThickness = 2;
-                            
                             SurfaceWindow1.mainGridView.Children.Add(conLine);
                         }
           
-                        tagcounter = tagcounter + 1;
                     }//foreach
                 }//if
             }//foreach
         }//drawconnections()
 
+        /*public void TagKeyword_Loaded_Again()
+        {
+
+            //TODO: customize TagKeyword's UI based on this.VisualizedTag here
+
+            int[] storyids = new int[14];
+            switch (this.VisualizedTag.Value)
+            {
+                case 0:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "heks", "character");
+                    break;
+                case 1:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "duivel", "character");
+                    break;
+                case 2:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "boer", "character");
+                    break;
+                case 3:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "soldaat", "character");
+                    break;
+                case 4:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "kind", "character");
+                    break;
+                case 5:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "spook", "character");
+                    break;
+                case 6:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "dorp", "location");
+                    break;
+                case 7:
+                    storyids =SurfaceWindow1.FilterJsonBy(story_list, "kerk", "location");
+                    break;
+                case 8:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "kasteel", "location");
+                    break;
+                case 9:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "bos", "location");
+                    break;
+                case 10:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "boerderij", "location");
+                    break;
+                case 11:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "schip", "location");
+                    break;
+                case 12:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "herberg", "location");
+                    break;
+                case 13:
+                    storyids = SurfaceWindow1.FilterJsonBy(story_list, "kerkhof", "location");
+                    break;
+                default:
+                    break;
+            }
+            story_list = TouchingStory.SurfaceWindow1.stories;
+
+            double segment = 360.0 / storyids.Length;
+            double rotation = 0.0;
+            string value = this.VisualizedTag.Value.ToString();
+
+            for (byte k = 0; k < storyids.Length; k++)
+            {
+                //MyTagVisualization parent = (TagVisualization)VisualizedCells.Parent;
+                
+                TextBlock story_brief = new TextBlock();
+                Story story = story_list.Find(x => x.id == storyids[k]);
+                story_brief.Name = "ID" + story.id.ToString();
+                Boolean story_existed = false;
+                int count = 0;
+                TextBlock cell = null;
+                if (SurfaceWindow1.commonStories.ContainsKey(story_brief.Name) == false || (SurfaceWindow1.commonStories.ContainsKey(story_brief.Name) == true && SurfaceWindow1.commonStories[story_brief.Name].Count < 2))
+                {
+                    story_brief.Text = story.title;
+                    //story_brief.Background = Brushes.LightBlue;
+                    story_brief.Foreground = Brushes.Black;
+                    //story_brief.LineHeight = Double.NaN;
+                    story_brief.FontSize = 12;
+                    story_brief.TextAlignment = TextAlignment.Center;
+                    story_brief.TextWrapping = TextWrapping.Wrap;
+                    story_brief.VerticalAlignment = VerticalAlignment.Center;
+                    story_brief.Width = 80;
+                    story_brief.Margin = new Thickness(5, 0, 5, 0);
+
+                    // create new border element as parent for textblock
+                    Border story_border = new Border();
+                    story_border.Width = 100;
+                    story_border.Height = 100;
+                    story_border.BorderBrush = Brushes.SlateBlue;
+                    story_border.BorderThickness = new Thickness(5, 5, 5, 5);
+                    story_border.Background = Brushes.AliceBlue;
+                    story_border.CornerRadius = new CornerRadius(180);
+                    story_border.Margin = new Thickness(240, -50, 0, 0);
+                    story_border.VerticalAlignment = VerticalAlignment.Center;
+                    story_border.TouchDown += new EventHandler<TouchEventArgs>(cell_TouchDown);
+
+                    // add story textblock to border element
+                    story_border.Child = story_brief;
+
+                    // arrange stories in a circle
+                    // circleradius responsive to nr of stories
+                    double adjustment = storyids.Length * 0.05;
+                    double circleRadius = VisualizedCells.Height * 0.25 * (1 + adjustment);
+                    //circleRadius = circleRadius * adj;
+                    double radians = rotation * Math.PI / 180.0;
+                    double x1 = circleRadius * Math.Cos(radians);
+                    double y1 = circleRadius * Math.Sin(radians) + VisualizedCells.Height / 2; ;
+                    TranslateTransform tt = new TranslateTransform(x1, y1);
+                    story_border.RenderTransformOrigin = new Point(0.0, 0.0);
+                    story_border.RenderTransform = tt;
+
+                    // Add a Line Element from tagcenter to textbox
+                    var myLine = new Line();
+                    myLine.Stroke = System.Windows.Media.Brushes.LightSteelBlue;
+                    myLine.X1 = 300;
+                    myLine.X2 = x1 + 240 + 50;
+                    myLine.Y1 = 300;
+                    myLine.Y2 = y1 - 50 + 50;
+                    myLine.HorizontalAlignment = HorizontalAlignment.Left;
+                    myLine.VerticalAlignment = VerticalAlignment.Center;
+                    myLine.StrokeThickness = 2;
+                    VisualizedCells.Children.Add(myLine);
+
+                    //SurfaceWindow1.homesurface.RegisterName(story_brief.Name, story_brief);
+                    if ((TextBlock)VisualizedCells.FindName(story_brief.Name) != null)
+                        VisualizedCells.UnregisterName(story_brief.Name);
+                    VisualizedCells.RegisterName(story_brief.Name, story_brief);
+                    VisualizedCells.Children.Add(story_border);
+
+                    rotation += segment;
+                }
+            }
+
+        }*/
     }
 }

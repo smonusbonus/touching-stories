@@ -14,7 +14,8 @@
             HorizontalAlignment="Stretch"
             Height="Auto" Width="Auto"
             VisualizationAdded="OnVisualizationAdded"           
-            VisualizationMoved="OnVisualizationMoved"             
+            VisualizationMoved="OnVisualizationMoved" 
+            VisualizationRemoved="OnVisualizationRemoved"
             >
         </s:TagVisualizer>
         <TextBlock

@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchingStory", "TouchingStory\TouchingStory.csproj", "{014C34C7-F219-42DA-BEC6-FA0C832AA4FD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5B50ED4-0B60-47CB-A49F-EC4EE227CCAD}"
-	ProjectSection(SolutionItems) = preProject
-		touchingstory.lnk = touchingstory.lnk
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
