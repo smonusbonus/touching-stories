@@ -393,7 +393,7 @@ namespace TouchingStory
 
             // To do: Get list with storyids for which lines to draw
             var connection_list = SurfaceWindow1.commonStories.Keys;
-
+           
             // Loop over all connections in list
             foreach (var storyid in connection_list)
             {
@@ -403,12 +403,16 @@ namespace TouchingStory
                 if (commontags.Count > 1)
                 {
                     // Get tagvisualization tag that contains textblock
+                        
+                    
+
                     TagKeyword TagVisOriginal = new TagKeyword();
                     for (int i = 0; i < commontags.Count; i++)
                     { 
-                        TagVisOriginal = (TagKeyword)SurfaceWindow1.mainGridView.FindName(commontags[0]);
+                        TagVisOriginal = (TagKeyword)SurfaceWindow1.mainGridView.FindName(commontags[i]);
                         if (TagVisOriginal != null)
-                            break;
+                            if (TagVisOriginal.FindName(storyid) != null)
+                                break;
                     }
                     // Get position textblock
                     TextBlock textblock = (TextBlock)TagVisOriginal.VisualizedCells.FindName(storyid);
@@ -427,8 +431,7 @@ namespace TouchingStory
                         if (tag != TagVisOriginal.Name)
                         {
                             // Get position tag
-                            TagKeyword TagVis = (TagKeyword)SurfaceWindow1.mainGridView.FindName(tag);
-                            TagData aaa = TagVis.VisualizedTag;
+                            TagKeyword TagVis = (TagKeyword)SurfaceWindow1.mainGridView.FindName(tag);                            
                             Point a = new Point(TagVis.Center.X, TagVis.Center.Y);
                             //Point positionTag = .PointToScreen(new Point(0d, 0d));
 
@@ -442,10 +445,12 @@ namespace TouchingStory
                             conLine.StrokeThickness = 2;
                             SurfaceWindow1.mainGridView.Children.Add(conLine);
                         }
+                        
           
                     }//foreach
                 }//if
             }//foreach
+           
         }//drawconnections()
 
         public void TagKeyword_Loaded_Again()
@@ -536,13 +541,16 @@ namespace TouchingStory
                             if (SurfaceWindow1.commonStories[story_brief.Name].Contains(this.Name) == false)
                             {
                                 SurfaceWindow1.addTagID_commonStories(story_brief.Name, this.Name);
-                                Dictionary<String, List<String>> aaa = SurfaceWindow1.commonStories;
-                                int a = 0;
                             }
                             //Dictionary<String, List<String>> aaa = SurfaceWindow1.commonStories;
                         }
                         break;
                     }
+                    /*if (tk.Name == this.Name && cell != null && SurfaceWindow1.commonStories.ContainsKey(story_brief.Name) && SurfaceWindow1.commonStories[story_brief.Name].Count > 1)
+                    {
+                        story_existed = true;
+                        break;
+                    }*/
                     
                 }
 

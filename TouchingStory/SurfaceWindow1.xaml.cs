@@ -286,6 +286,7 @@ namespace TouchingStory
             foreach (string value in commonStories.Keys)
             {
                 keys.Add(value);
+             
             }
             for (int i =0; i<keys.Count; i++)
             {
@@ -295,6 +296,7 @@ namespace TouchingStory
                     TagKeyword tagkeyword2 = (TagKeyword)mainGridView.FindName(commonStories[keys[i]][0]);
                     tagkeyword2.TagKeyword_Loaded_Again();
                 }
+                
             }
             TagKeyword.DrawConnections();      
         }
